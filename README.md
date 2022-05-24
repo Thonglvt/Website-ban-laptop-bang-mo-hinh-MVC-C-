@@ -5,7 +5,7 @@
 
 **Ngôn ngữ sử dụng C#**
 
-**Công nghệ sử dụng: ASP.NET MVC + Entity Framework, JQuery + Bootstrap**
+**Công nghệ sử dụng: ASP.NET MVC + Entity Framework, JQuery + Bootstrap + Javascript**
 
 **Hệ quản trị: Microsoft SQL Server**
 
