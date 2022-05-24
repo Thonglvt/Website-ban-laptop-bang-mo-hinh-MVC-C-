@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    @*<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">*@
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.rawgit.com/PascaleBeier/bootstrap-validate/v2.2.0/dist/bootstrap-validate.js"></script>
+ 
+    <link href="/Assets/Admin/css/Style2.css" rel="stylesheet" type="text/css">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" />
+
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <style>
+        nav div ul li a:hover {
+            color: #090;
+        }
+    </style>
+    @RenderSection("Scripts", false)
+</head>
+<body>
+    <div id="menu" class="row">
+        <form action="/Product/SearchProduct" id="header" method="get">
+            @*-------Hearder đầu tiên chạy quảng cáo---------*@
+            @Html.Action("BannerTopPartial", "Banner")
+
+            @*---------Logo , thanh tìm kiếm , giỏ hàng , đăng nhâp ,...*@
+            <nav class="navbar navbar-expand navbar-light" style="background-color:black;">
+                <div class="container">
+                    @Html.Action("LogoPartial", "Logo")
+                    @*<input class="form-control mx-auto w-50" type="text" id="txt_Search" name="txt_Search" placeholder="Bạn tìm gì..." aria-label="Search">*@
+
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <input name="txtSearch" type="text" class="form-control" placeholder="Bạn tìm gì..." aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-light" type="submit"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="15" height="16"><path fill-rule="evenodd" d="M11.5 7a4.499 4.499 0 11-8.998 0A4.499 4.499 0 0111.5 7zm-.82 4.74a6 6 0 111.06-1.06l3.04 3.04a.75.75 0 11-1.06 1.06l-3.04-3.04z"></path></svg></button>
+                            </div>
+                        </div>
+                    </div>
+                    @* Hiển thị giỏ hàng *@
+                    <button class="btn btn-outline-light mx-5 position-relative" type="submit">
+                        @Html.Action("CartPartial", "Cart")
+                    </button>
+                    @* Hiển thị khu vực account *@
+                    @if (Session["user"] == null)
+                    {
+                        @RenderPage("_LoginLogoutPartial.cshtml")
+                    }
+                    else
+                    {
+                        @Html.Action("LoginSuccessPartial", "User")
+                    }
+                </div>
+            </nav>
+
+            @*----------Hiển thị menu-------------*@
+            @RenderPage("_MenuContent.cshtml")
+        </form>
+    </div>
+
+    @*-------------------Chạy banner , Quảng cáo--------------------*@
+    @Html.Action("BannerMidPartial", "Banner")
+    
+    <br />
+    @*----------------HIển thị thương hiệu sản phẩm------------*@
+    @RenderPage("_TrademarkPartial.cshtml")
+    <br />
+        @*--------------HIển thị san phẩm----------------*@
+    <div id="wrapper">
+            @RenderBody()
+            <br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+            <br /><br /><br /><br /><br />
+            <br /><br /><br /><br /><br />
+    </div>
+    <div id="Footer" class="row" style="background-color:black" @*#cecdcd*@>
+        <div class="col text-light mt-3 mb-3" style="text-align:center;">
+            <span class="text-muted">Copyright by sinh viên HUFI® Since 2021</span><br />
+            <span class="text-muted">Góp ý và Khiếu nại: levanthongqn35@gmail.com</span>
+        </div>
+    </div>
+    <div class="cta">
+        <div class="ctaitem">
+            <div class="ctabg" style="background: #dd3333"></div>
+            <div class="ctacontent" style="background: #dd3333">0941679927</div>
+            <div class="ctaimg" style="background: #dd3333"><a href="tel:0941679927"><img src="/Assets/Image/call.png" alt="Gọi điện" /></a></div>
+        </div>
+        <div class="ctaitem">
+            <div class="ctabg" style="background: #2196F3"></div>
+            <div class="ctacontent" style="background: #2196F3">Messenger</div>
+            <div class="ctaimg" style="background: #2196F3"><a href="https://m.me/100039053493163"><img src="/Assets/Image/mess.png" alt="Messenger" /></a></div>
+        </div>
+        <div class="ctaitem">
+            <div class="ctabg" style="background: #2196F3"></div>
+            <div class="ctacontent" style="background: #2196F3">Chat Zalo</div>
+            <div class="ctaimg" style="background: #2196F3"><a href="https://zalo.me/0941679927"><img src="/Assets/Image/zalo.png" alt="Chat Zalo" /></a></div>
+        </div>
+        <div class="ctaitem">
+            <div class="ctabg" style="background: #ffd800"></div>
+            <div class="ctacontent" style="background: #ffd800">Liên Hệ</div>
+            <div class="ctaimg" style="background: #ffd800"><a href="https://forms.gle/UZ3BT4LU12NSsxaSA"><img src="/Assets/Image/letter.png" alt="Liên hệ" /></a></div>
+        </div>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,139 @@
+﻿@model DoAnAdmin.Models.promotion
+
+@{
+    ViewBag.Title = "ThanhToanGioHang";
+    Layout = "~/Views/Shared/_DetailLayoutPage.cshtml";
+}
+
+
+
+<div class="container" style="width:800px;">
+    <a href="@Url.Action("ShowAllProducts","Product")"><i class="fas fa-angle-left"></i>&nbsp; Mua sản phẩm khác</a>
+
+    <div class="card mt-1 container">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-2">
+                    <img src="/Assets/Image/ImageProduct/@Model.Product.avatar" width="90%" />
+                </div>
+                <div class="col-7">
+                    <h6 style="font-weight:bold;font-size:13px">@Model.Product.Name (@Model.product_id)</h6>
+                </div>
+                <div class="col-1">
+                </div>
+                <div class="col-2">
+                    <span class="text-secondary" style="text-decoration:line-through">@string.Format("{0:0,0}", Model.Product.price)<sup>đ</sup></span><br />
+                    <span class="text-danger ">@string.Format("{0:0,0}", ViewBag.IsKhuyenMai)<sup>đ</sup></span><br />
+                    <span class="text-muted" style="font-size:14px">Số lượng: 1</span>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-3">
+                    <span>Tạm tính (1 sản phẩm):</span>
+                </div>
+                <div class="col-7">
+                </div>
+                <div class="col-2">
+                    <span class="text-secondary ">@string.Format("{0:0,0}", ViewBag.IsKhuyenMai)<sup>đ</sup></span><br />
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div>
+                <p style="text-transform:uppercase;font-size:15px">THÔNG TIN KHÁCH HÀNG:</p>
+            </div>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                <table class="table">
+                    <tr>
+                        <td>
+                            <input type="radio" name="optRadioGender" id="optionsRadiosNam" value="Nam" checked>&nbsp;Anh &nbsp;&nbsp;
+                            <input type="radio" name="optRadioGender" id="optionsRadiosNu" value="Nữ">&nbsp;Chị
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" class="form-control" name="txtHoTen" placeholder="Họ và Tên" />
+                            <span class="text-danger" style="font-size:13px">@ViewBag.tbHoTen</span>
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" name="txtSdt" placeholder="Số điện thoại" />
+                            <span class="text-danger" style="font-size:13px">@ViewBag.tbSDT</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span style="text-transform:uppercase;font-size:15px">Chọn cách thức nhận hàng:</span></td>
+                        <td>
+                            <input type="radio" name="optRadios" id="optionsRadios3" value="1" checked>&nbsp;Giao tận nơi &nbsp;&nbsp;
+                            <input type="radio" name="optRadios" id="optionsRadios4" value="2">&nbsp;Nhận tại cửa hàng
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <textarea class="form-control" name="txtAddress" placeholder="Số nhà, tên đường, Phường/Xã, Quận/Huyện, Tỉnh/Thành Phố"></textarea>
+                            <span class="text-danger" style="font-size:13px">@ViewBag.tbDiaChi</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <input type="text" class="form-control" name="txtYeuCau" placeholder="Yêu cầu khác (Không bắt buộc)" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <input type="checkbox" value="Television" name="Chk1">&nbsp;Gọi người khác nhận hàng (nếu có)<br />
+                            <input type="checkbox" value="Website" name="Chk2">&nbsp;Hướng dẫn sử dụng, giải đáp thắc mắc sản phẩm<br />
+                            <input type="checkbox" value="NewsPaper" name="Chk3">&nbsp;Xuất hóa đơn công ty<br />
+                        </td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <div class="card">
+                                <div class="card-header">
+                                    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+                                        <li class="nav-item">
+                                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                                               aria-expanded="true" aria-controls="collapseUtilities">
+                                                &nbsp;&nbsp;<i class="fas fa-gift"></i>
+                                                <span>Dùng mã giảm giá</span>
+                                            </a>
+                                            <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                                                 data-parent="#accordionSidebar">
+                                                <div class="bg-white py-2 collapse-inner rounded row">
+                                                    <div class="col-9">
+                                                        @*<h6 class="collapse-header">Custom Utilities:</h6>*@
+                                                        <input type="text" class="form-control" name="txtMaGiamGia" placeholder="Nhập mã giảm giá" />
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <a class="btn btn-primary" href="#">Áp dụng</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><span style="font-weight:bold">Tổng tiền:</span></td>
+                        <td class="text-danger " style="font-weight: bold;text-align:right">@string.Format("{0:0,0}", ViewBag.IsKhuyenMai)<sup>đ</sup></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <input class="btn btn-warning text-light" type="submit" value="ĐẶT HÀNG" style="font-weight:bold; width:720px" />
+                            <center class="text-muted mt-1" style="font-size:13px">Anh/Chị có thể chọn hình thức thanh toán sau khi đặt hàng</center>
+                        </td>
+                    </tr>
+                </table>
+            }
+        </div>
+    </div>
+    <center class="text-muted mt-2" style="font-size:13px">Bằng cách đặt hàng, bạn đồng ý với Điều khoản sử dụng của T&TShop</center>
+</div>
+
+

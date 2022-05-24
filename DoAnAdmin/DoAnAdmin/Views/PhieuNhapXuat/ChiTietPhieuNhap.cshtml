@@ -1,0 +1,64 @@
+﻿@model IEnumerable<DoAnAdmin.Models.ChiTietPhieuNhap>
+@{
+    ViewBag.Title = "ChiTietPhieuNhap";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+<center><h4 style="text-transform:uppercase;font-weight:bold">Chi tiết phiếu: #</h4></center>
+
+<div>
+    <a href="@Url.Action("ThemCTPhieuNhap", "Admin")"><i class="fas fa-plus-square"></i>&nbsp;&nbsp;New</a>
+
+    <table class="table table-bordered table-info">
+        <thead class="table-primary">
+            <tr>
+                <th>Mã#</th>
+                <th>Mã nhân viên</th>
+                <th>Ngày nhập</th>
+                <th>Mã sản phẩm</th>
+                <th>Số lượng</th>
+                <th>Đơn giá</th>
+                <th>Tỉ lệ(0-100)</th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhieuNhap_id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhieuNhap.employee_id)
+                </td>
+                <td>
+                    @string.Format("{0:d/M/yyyy HH:mm:ss}", item.PhieuNhap.date_)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.product_id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.quanlity)
+                    @*<input class="form-control" size="3" type="text" name="txtName" value="@item.quanlity" />*@
+                </td>
+                <td>
+                    @string.Format("{0:0,0} đ", item.price_Import)
+                    @*<input class="form-control" size="5" type="text" name="txtName" value="@string.Format("{0:0,0}", item.price_Import)" />*@
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ratio) &nbsp;%
+                    @*<input class="form-control" size="1" type="text" name="txtName" value="@item.ratio" />*@
+                </td>
+                <td>
+                    <a href="#" style="text-decoration:none;color:black"><i class="fas fa-wrench"></i></a>&nbsp;&nbsp;|
+                    <a href="#" style="text-decoration:none;color:black"><i class="fas fa-save"></i></a>&nbsp;&nbsp;|
+                    <a href="#" style="text-decoration:none;color:black"><i class="fas fa-plus-square"></i></a>&nbsp;&nbsp;|
+                </td>
+            </tr>
+        }
+    </table>
+    <div>
+        @Html.ActionLink("Back to List", "PhieuNhap")
+    </div>
+
+    @*@Html.PagedListPager(Model, Page => Url.Action("PhieuNhap", new { @id = i Page }))*@
+</div>

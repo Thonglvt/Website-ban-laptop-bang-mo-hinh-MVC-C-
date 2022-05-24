@@ -1,0 +1,109 @@
+﻿@model DoAnAdmin.Models.ChiTietPhieuNhap
+
+@{
+    ViewBag.Title = "ThemPhieuNhap";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+<div class="container">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+    <div class="">
+        <h3 class="mt-3" style="font-weight:bold; color:blue;">THÊM PHIẾU NHẬP</h3>
+
+        <div class="form-group">
+            id
+            <input type="text" value="@Session["id"]" class="btn" name="txtID" />
+            @Html.ValidationMessageFor(model => model.PhieuNhap_id)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.product_id)
+            @Html.DropDownListFor(model => model.product_id, (IEnumerable<SelectListItem>) ViewBag.Prod, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.product_id, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.quanlity)<br />
+            <input type="number" name="txtQuanlity"/>
+            @*@Html.TextBoxFor(model => model.quanlity, new { @class = "form-control" })*@
+            @Html.ValidationMessageFor(model => model.quanlity, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.price_Import)<br />
+            <input type="number" name="txtImport" />
+            @*@Html.TextBoxFor(model => model.price_Import, new { @class = "form-control" })*@
+            @Html.ValidationMessageFor(model => model.price_Import, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.ratio)<br />
+            <input type="number" name="txtRatio" />
+            @*@Html.TextBoxFor(model => model.ratio, new { @class = "form-control"})*@
+            @Html.ValidationMessageFor(model => model.ratio, "", new { @class = "text-danger" })
+        </div>
+        <span style="color:green;font-weight:bold">@ViewBag.tb</span>
+        <p class="form-group mx-auto">
+            <input type="submit" value="Create" class="btn btn-primary" />
+        </p>
+        @Html.ActionLink("Back to List", "PhieuNhap")
+    </div>
+        
+    }
+</div>
+
+@*@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div class="form container">
+        <center><h3>ChiTietPhieuNhap</h3></center>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.PhieuNhap_id)
+        </div>
+        <div class="editor-field">
+            <input type="button" value="@ViewBag.id" class="btn" name="txtID"/>
+            @Html.ValidationMessageFor(model => model.PhieuNhap_id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.product_id)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(model => model.product_id, (IEnumerable<SelectListItem>)ViewBag.Prod, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.product_id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.quanlity)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.quanlity)
+            @Html.ValidationMessageFor(model => model.quanlity)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.price_Import)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.price_Import)
+            @Html.ValidationMessageFor(model => model.price_Import)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ratio)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ratio)
+            @Html.ValidationMessageFor(model => model.ratio)
+        </div>
+        <span style="color:green;font-weight:bold" >@ViewBag.tb</span>
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </div>
+}*@
+
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@

@@ -1,0 +1,205 @@
+﻿@{
+    ViewBag.Title = "ThongSoKyThuat";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="container-fluid card">
+        <div class="card-header">
+            <center><h5 style="font-weight:bold;" class="text-primary">THÔNG SỐ KỸ THUẬT</h5> 
+                <span>Mã#:&nbsp;<input type="button" class="btn btn-success btn-sm text-light" name="txtID" value="@ViewBag.id" style="font-size:13px;background-color:green;color:white" /></span>
+            </center>       
+        </div>
+        <div class="card-header">
+            <span class="mb-1" style="font-size:14px">Tên sản phẩm:</span> <input class="form-control" type="text" name="txtName" value="@Session["name"]" style="font-size:13px" />   
+        </div>
+        <div class="card-body">
+            <div class="row" style="font-size:12px;color:black">
+                <div class="col-4">
+                    @*  *@
+
+                    <div class="card">
+                        <div class="card-header">
+                            <center class="panel-heading"><h6 style="font-weight:bold">Bộ nhớ RAM, Ổ cứng</h6></center>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label for="username">RAM: </label>
+                                <input style="font-size:16px" class="form-control" type="text" name="txtRAM" value="@ViewBag.RAM">
+                            </div>
+                            <div class="mb-3">
+                                <label for="username">Loại RAM: </label>
+                                <input style="font-size:16px" class="form-control" type="text" name="txtTypeRAM" value="@ViewBag.RAM_type" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="username">Tốc độ Bus RAM: </label>
+                                <input style="font-size:16px" class="form-control" type="text" name="txtBusRAM" value="@ViewBag.BusRAM" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="username">Hỗ trợ RAM tối đa: </label>
+                                <input style="font-size:16px" class="form-control" type="text" name="txtSuppMaxRam" value="@ViewBag.MaxRAM" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="username">Ổ cứng: </label>
+                                <input style="font-size:16px" class="form-control" type="text" name="txtHardDriver" value="@ViewBag.OCung" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    @*  *@
+                    <div class="card">
+                        <div class="card-header">
+                            <center class="panel-heading"><h6 style="font-weight:bold">Cổng kết nối & tính năng mở rộng</h6></center>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label for="username">Cổng giao tiếp: </label>
+                                <input style="font-size:16px" class="form-control" type="text" name="txtCongGTiep" value="@ViewBag.CongGiaoTiep" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="username">Kết nối không đây: </label>
+                                <input style="font-size:16px" class="form-control" type="text" name="txtKNKG" value="@ViewBag.KetNoiKhongDay" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="username">Webcam: </label>
+                                <input style="font-size:16px" class="form-control" type="text" name="txtWebcam" value="@ViewBag.Webcam" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="username">Tính năng khác: </label>
+                                <input style="font-size:16px" class="form-control" type="text" name="txtTNKhac" value="@ViewBag.TinhNangKhac" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="username">Đèn bàn phím: </label>
+                                <input style="font-size:16px" class="form-control" type="text" name="txtDenBanPhim" value="@ViewBag.DenBanPhim" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    @*  *@
+                    <div class="card">
+                        <div class="card-header">
+                            <center class="panel-heading"><h6 style="font-weight:bold">Đồ họa và âm thanh</h6></center>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label>Card màn hình: </label>
+                                <input style="font-size:16px" class="form-control" type="text" name="txtVGA" value="@ViewBag.VGA" />
+                            </div>
+                            <div class="mb-3">
+                                <label>Công nghệ âm thanh: </label>
+                                <input style="font-size:16px" class="form-control" type="text" name="txtCNAmThanh" value="@ViewBag.AmThanh" />
+                            </div>
+                        </div>
+                    </div>
+                    @*  *@
+                    <div class="card">
+                        <div class="card-header">
+                            <center class="panel-heading"><h6 style="font-weight:bold">Kích thước và trọng lượng</h6></center>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label for="username">Kích thước, trọng lượng: </label>
+                                <input style="font-size:16px" class="form-control" type="text" name="txtKTTL" value="@ViewBag.SizeAndWeight" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="username">Chất liệu: </label>
+                                <input style="font-size:16px" class="form-control" type="text" name="txtChatLieu" value="@ViewBag.ChatLieu" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="font-size: 12px; color: black">
+                <div class="col-4">
+                    @*  *@
+                    <div class="card">
+                        <div class="card-header">
+                            <center class="panel-heading"><h6 style="font-weight:bold">Màn hình</h6></center>
+                        </div>
+                        <div class="card-body"> 
+                            <div class="mb-3">
+                                <label for="username">Màn hình: </label>
+                                <input style="font-size:16px" class="form-control" type="text" name="txtMonitor" value="@ViewBag.ManHinh" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="username">Độ phân giải: </label>
+                                <input style="font-size:16px" class="form-control" type="text" name="txtDoPhanGiai" value="@ViewBag.DoPhanGiai" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="username">Tần số quét: </label>
+                                <input style="font-size:16px" class="form-control" type="text" name="txtTanSoQuet" value="@ViewBag.TanSoQuet" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="username">Công nghệ màn hình: </label>
+                                <input style="font-size:16px" class="form-control" type="text" name="txtCNManHinh" value="@ViewBag.CongNgheManHinh" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    @*  *@
+                    <div class="card">
+                        <div class="card-header">
+                            <center class="panel-heading"><h6 style="font-weight:bold">Bộ xử lý</h6></center>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label>Công nghệ CPU: </label>
+                                <input style="font-size:16px" class="form-control" type="text" name="txtCPU" value="@ViewBag.CPU" />
+                            </div>
+                            <div class="mb-3">
+                                <label>Số nhân: </label>
+                                <input style="font-size:16px" class="form-control" type="text" name="txtNhan" value="@ViewBag.SoNhan" />
+                            </div>
+                            <div class="mb-3">
+                                <label>Số luồng: </label>
+                                <input style="font-size:16px" class="form-control" type="text" name="txtLuong" value="@ViewBag.SoLuong" />
+                            </div>
+                            <div class="mb-3">
+                                <label>Tốc độ CPU: </label>
+                                <input style="font-size:16px" class="form-control" type="text" name="txtSpeedCPU" value="@ViewBag.Speed" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="username">Tốc độ tối đa: </label>
+                                <input style="font-size:16px" class="form-control" type="text" name="txtMaxSpeed" value="@ViewBag.MaxSpeed" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="username">Bộ nhớ đệm: </label>
+                                <input style="font-size:16px" class="form-control" type="text" name="txtCache" value="@ViewBag.Cache" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <center class="panel-heading"><h6 style="font-weight:bold">Thông tin khác</h6></center>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label for="username">Thông tin Pin: </label>
+                                <input style="font-size:16px" class="form-control" type="text" name="txtPin" value="@ViewBag.Pin" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="username">Hệ điều hành: </label>
+                                <input style="font-size:16px" class="form-control" type="text" name="txtHDH" value="@ViewBag.HeDieuHanh" />
+                            </div>
+                            <div class="mb-3">
+                                <label for="username">Thời điểm ra mắt: </label>
+                                <input style="font-size:16px" class="form-control" type="text" name="txtRaMat" value="@ViewBag.RaMat" />
+                            </div>
+                        </div>
+                    </div>
+                    <label>@ViewBag.tb</label>
+                    <center>
+                        <button class="btn btn-info" style=" font-size:17px" type="submit"><i class="glyphicon glyphicon-refresh"></i>&nbsp;Update</button>
+                    </center>
+                    <br />
+                </div>
+            </div>
+        </div>
+    </div>
+}

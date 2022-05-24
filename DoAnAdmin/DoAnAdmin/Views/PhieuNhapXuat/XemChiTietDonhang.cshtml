@@ -1,0 +1,81 @@
+﻿@model IEnumerable<DoAnAdmin.Models.ChiTietPhieuXuat>
+
+@{
+    ViewBag.Title = "XemChiTietDonhang";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+<br />
+<div class="card container-fluid" style="border-radius:10px">
+    <div class="card-header bg-gradient-light">
+        <center class=""><h5 style="text-transform:uppercase;font-weight:bold">QUẢN LÝ ĐƠN XUẤT</h5></center>
+    </div>
+    <div class="card-body">
+        @using (Html.BeginForm())
+        {
+            @*<table class="table">
+
+            </table>*@
+            <div class="row container mt-2">
+                <div class="col-4">
+                    <input type="text" class="form-control" placeholder="Search" name="txtSearch" />
+                </div>
+                <div class="col-1">
+                    @*<input class="btn btn-primary" type="submit" value="Search" />*@
+                    <input type="submit" class="btn btn-primary" value="&#xf002" />
+                </div>
+            </div>
+        }
+        @*<div class="row">
+                <div class="col-9">
+                </div>
+                <div class="col-3">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="@Url.Action("ProductsManager", "Product")" class="btn btn-secondary btn-sm text-light"> <i class="fas fa-times"></i>&nbsp;Reset</a>
+                    <a href="@Url.Action("ProductOver","Product")" class="btn btn-danger btn-sm text-light"> Đã hết</a>
+                    <a href="@Url.Action("ProductSelling", "Product")" class="btn btn-success btn-sm text-light"> Bán chạy</a>
+                </div>
+            </div>*@
+        <table class="table table-bordered table-hover mt-3" style="font-size: 12px; color: black; border-radius: 20px; text-align:center;">
+            <thead class="thead-light">
+                <tr>
+                    <th>Mã hóa đơn#</th>
+                    <th>Mã sản phẩm</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Số lượng</th>
+                    <th>Đơn giá</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.phieuXuat_id)
+                    </td>
+                    <td class="w-45">
+                        @Html.DisplayFor(modelItem => item.product_id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Product.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.quanlity)
+                    </td>
+                    <td>
+                        @string.Format("{0:0,0}", item.price) <sup>đ</sup>
+                    </td>
+                    <td>
+                        <a href="@Url.Action("XemChiTietDonHang", "PhieuNhapXuat", new {})" style="text-decoration: none; color: black" class="text-primary">Xem chi tiết</a>
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+    <div>
+        @Html.ActionLink("Back to List", "PhieuXuat")
+    </div>
+</div>
+<br />

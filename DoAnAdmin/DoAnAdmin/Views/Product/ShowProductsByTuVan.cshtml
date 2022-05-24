@@ -1,0 +1,91 @@
+﻿@model IEnumerable<DoAnAdmin.Models.Detail>
+
+<div style="background-color: #25304b;">
+    <br />
+    <div class="container">
+        <div class="d-lg-flex row">
+            @foreach (var item in Model)
+            {
+                <div class="card1 border-0 me-lg-4 mb-lg-10 mb-4 col-3 container" style="margin-bottom:20px">
+                    <div class="backgroundEffect"></div>
+                    <div class="pic">
+                        <br />
+                        <a href="@Url.Action("DetailProduct", "Product", new {@maSP = @item.product_id })"><img class="" src="/Assets/Image/ImageProduct/@item.Product.avatar" alt=""></a>
+                        <div class="promotion"> <span class="tragop">Trả góp 0%</span> <span class="giamgia">Giảm 1.000.000đ</span></div>
+                    </div>
+                    <div class="content">
+                        <br />
+                        <a class="mt-4 mb-2" style="font-size: 14px; color: black; text-decoration: none;text-align:justify" href="@Url.Action("DetailProduct", "Product", new { @maSP = @item.product_id })">
+                            @if (@item.Product.Name.Trim().Length > 72)
+                            {
+                                @item.Product.Name.Substring(0, 72)
+                            }
+                            else
+                            {
+                                @item.Product.Name
+                            }
+                        </a>
+                        <br />
+                        <span class="h-1 mt-4 price" style="font-weight:bold;">
+                            @Html.Action("PromotionPricePartial", "Product", new { @maSP = item.product_id })
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            @*Nếu có khuyến mãi thì gạch giá cũ đi*@
+
+                            <span class="text-muted" style="text-decoration:line-through;font-size:15px">@string.Format("{0:0,0}", item.Product.price) đ</span>
+                            @*else
+                                {
+                                    <span>@string.Format("{0:0,0}", item.Product.price) <sup>đ</sup></span>
+                                }*@
+                            @*@string.Format("{0:0,0}", item.Product.price) đ*@
+                        </span>
+                        <p class="text-muted mt-3">
+                            <i style="width: 20px;" class="icon text-muted fas fa-desktop pe-1 mb-2"></i><span>
+                                &nbsp;&nbsp;@item.ManHinh
+                                @if (@item.DoPhanGiai.Trim().Length > 21)
+                                {
+                                    @item.DoPhanGiai.Substring(0, 21);
+                                }
+                                else
+                                {
+                                    @item.DoPhanGiai;
+                                }
+                            </span><br>
+                            <i style="width: 20px;" class="icon text-muted fas fa-microchip pe-1 mb-2"></i><span>&nbsp;&nbsp;@item.CPU<br></span>
+                            <i style="width: 20px;" class="icon text-muted fas fa-sd-card pe-1 mb-2"></i><span>&nbsp;&nbsp;@item.RAM, @item.RAM_type.Split(' ')[0], @item.BusRAM<br></span>
+                            @if (@item.OCung.Length > 20)
+                            {
+                                <i style="width: 20px;" class="icon text-muted fas fa-hdd pe-1 mb-2"></i><span>&nbsp;&nbsp;@item.OCung.Substring(0, 20) ...<br></span>
+                            }
+                            else
+                            {
+                                <i style="width: 20px;" class="icon text-muted fas fa-hdd pe-1 mb-2"></i><span>&nbsp;&nbsp;@item.OCung<br></span>
+                            }
+                            @if (@item.VGA.Length > 25)
+                            {
+                                <i style="width: 20px;" class="icon text-muted fas fa-digital-tachograph pe-1"></i><span>&nbsp;&nbsp;@item.VGA.Substring(0, 25) ...</span>
+                            }
+                            else
+                            {
+                                <i style="width: 20px;" class="icon text-muted fas fa-digital-tachograph pe-1"></i><span>&nbsp;&nbsp;@item.VGA</span>
+                            }
+                        </p>
+                        <br />
+                        <div class="d-flex align-items-center justify-content-between mt-3 pb-3">
+                            @*<div class="btn btn-primary">*@
+                            @*<a style="text-decoration:none;color:black" href="@Url.Action("DetailProduct", "Product")">Thêm giỏ hàng</a>*@
+                            @*@Html.ActionLink("Thêm giỏ hàng", "DetailProduct", "Product", new { @class = "text-dark", style = "text-decoration:none" })*@
+                            @*<span class="fas fa-arrow-right">
+                                    </span>
+                                </div>*@
+                            <div class="d-flex align-items-center justify-content-center foot">
+                                <a href="@Url.Action("ThemGioHang", "Cart", new { @idsp = item.product_id, @strURL = Request.Url.ToString() })" class="admin">Thêm giỏ hàng</a>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <p class="ps-3 icon text-muted"><span class="far fa-eye pe-1"></span>@item.Product.view_</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

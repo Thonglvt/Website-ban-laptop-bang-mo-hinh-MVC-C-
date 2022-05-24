@@ -1,0 +1,105 @@
+﻿@model DoAnAdmin.Models.Detail
+
+@{
+    ViewBag.Title = "DetailProduct";
+    Layout = "~/Views/Shared/_DetailLayoutPage.cshtml";
+}
+
+<div class="container">
+    <h5 style="font-weight:bold">@Model.Product.Name (@Model.product_id) &nbsp;&nbsp;&nbsp;&nbsp;
+        <i style="font-size:15px;color:red" class="far fa-star"></i>
+        <i style="font-size:15px;color:red" class="far fa-star"></i>
+        <i style="font-size:15px;color:red" class="far fa-star"></i>
+        <i style="font-size:15px;color:red" class="far fa-star"></i>
+        <i style="font-size:15px;" class="far fa-star"></i>
+    </h5><br />
+    <div class="row mt-2">
+        <div class="col-7">
+            @Html.Action("ImageProductPartial", "Product", new { @maSP = @ViewBag.maSP })
+            <br /><br /><br /><br />
+            <table class="table">
+                <tr>
+                    <td>Hư gì đổi nấy 12 tháng tại 2831 siêu thị toàn quốc (miễn phí tháng đầu) <a href="#" style="text-decoration:none">(Xem chi tiết)</a></td>
+                    <td>Bảo hành chính hãng laptop 2 năm</td>
+                </tr>
+            </table>
+            <br />
+            <div>
+                <h4 style="font-weight:bold">Bài viết đánh giá</h4> 
+                @Html.Action("BaiVietPartial", "Product", new { @maSP = @ViewBag.maSP })
+            </div>
+        </div>
+        &nbsp;&nbsp;&nbsp;
+        <div class="col-4">@* col-4 *@
+            Giá tại <span style="color:blue">Hồ Chí Minh</span><br />
+            <span class="h-1 mt-4" style="font-weight:bold; color:red;font-size:22px">
+                @Html.Action("PromotionPricePartial", "Product", new { @maSP = @ViewBag.maSP }) &nbsp;&nbsp;
+                @*Nếu có khuyến mãi thì gạch giá cũ đi*@
+                @if (ViewBag.IsKhuyenMai == 1)
+                {
+                    <span class="text-muted"style="text-decoration:line-through">@string.Format("{0:0,0}", Model.Product.price) đ</span>
+                }
+                else
+                {
+                    <span>@string.Format("{0:0,0}", Model.Product.price) <sup>đ</sup></span>
+                }
+            </span>
+            @* Hiển thị khuyến mãi của sản phẩm *@
+            @Html.Action("PromotionsGiftPartial", "Product", new { @maSP = @ViewBag.maSP })
+            <br />
+            <p style="font-weight:bold;font-size:18px">Ưu đãi khi thanh toán</p>
+            <div class="row mt-1">
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <img src="/Assets/Image/ImageAdvertise/vnpay.png" width="30%" /><br />
+                            <span class="text-primary">Giảm &nbsp;</span><span style="font-weight:bold;" class="text-primary">300.000<sup>đ</sup></span>
+                            <p class="text-muted" style="font-size:14px">Sản phẩm Laptop</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <img src="/Assets/Image/ImageAdvertise/vib.jpg" width="30%" /><br />
+                            <span class="text-primary">Giảm &nbsp;</span><span style="font-weight:bold;" class="text-primary">500.000<sup>đ</sup></span>
+                            <p class="text-muted" style="font-size:14px">Sản phẩm từ 5Tr</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <a href="@Url.Action("ThanhToanNgay", "User", new { @maSP = @Model.product_id })" style="text-decoration:none;text-align:center" class="btn btn-block btn-danger mt-3">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                MUA NGAY
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </a>
+            </div>
+            <div class="text-center">
+                <a href="@Url.Action("ThemGioHang", "Cart", new { @idsp = Model.product_id, @strURL = Request.Url.ToString() })" style="text-decoration:none;text-align:center" class="btn btn-block btn-warning mt-3 text-light">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    THÊM VÀO GIỎ HÀNG
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </a>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    &nbsp;&nbsp;<a style="text-decoration: none; text-align: center; font-size: 14px;" class="btn btn-block btn-primary mt-3 text-light">
+                        MUA TRẢ GÓP<br />
+                        <span style="font-size:13px">Duyệt hồ sơ trong 5 phút</span>
+                    </a>
+                </div>
+                <div class="col-6 text-light">
+                    <a style="text-decoration: none; text-align: center; font-size: 14px; " class="btn btn-block btn-primary mt-3 text-light">
+                        MUA TRẢ GÓP QUA THẺ<br />
+                        <span style="font-size:13px">Visa, Mastercard, JCB, Amex</span>
+                    </a>
+                </div>
+            </div>
+            <div class="row mt-3 mx-2">
+                @Html.Action("ThongSoKyThuatGUI", "Product", new { @maSP = Model.product_id }) 
+            </div>
+        </div>@* col-4 *@
+        
+    </div>
+</div>

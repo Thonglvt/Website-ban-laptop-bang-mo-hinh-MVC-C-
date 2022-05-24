@@ -1,0 +1,71 @@
+﻿@model DoAnAdmin.Models.PromotionsGift
+
+@if (ViewBag.prom == null)
+{
+    <div class="card">
+        <div class="card-header">
+            <span style="font-weight:bold">Chưa có chương trình khuyến mãi</span><br />
+        </div>
+    </div>
+}
+else
+{ 
+<div class="card">
+    <div class="card-header" >
+        <span style="font-weight:bold">Khuyến mãi trị giá</span>&nbsp;@string.Format("{0:0,0}", Model.priceSum)
+        <sup>đ</sup><br />
+        <span class="text-muted">Khuyến mãi dự kiến áp dụng đến hết @string.Format("{0:d/M/yyyy}", Model.date_end) </span>
+    </div>
+    <div class="card-body">
+        <table class="table text-justify">
+            <tr>
+                <td>
+                @if(Model.gift1.Trim() != string.Empty)
+                {
+                    <img src="/Assets/Image/ImageDescription/gift1.png" />
+                }
+                </td>
+            <td><span style="font-size:14px">@Model.gift1.Trim()</span> </td>
+        </tr>
+        <tr>
+            <td>
+                @if(Model.gift2.Trim() != string.Empty)
+                {
+                    <img src="/Assets/Image/ImageDescription/gift2.png" />
+                }
+            </td>
+            <td><span style="font-size:14px">@Model.gift2.Trim()</span></td>
+        </tr>
+        <tr>
+            <td>
+                @if(Model.gift3.Trim() != string.Empty)
+                {
+                    <img src="/Assets/Image/ImageDescription/gift3.png" />
+                }
+            </td>
+            <td><span style="font-size:14px">@Model.gift3.Trim()</span></td>
+        </tr>
+        <tr>
+            <td>
+                @if(Model.gift4.Trim() != string.Empty)
+                {
+                    <img src="/Assets/Image/ImageDescription/gift4.png" />
+                }
+            </td>
+            <td><span style="font-size:14px">@Model.gift4.Trim()</span></td>
+        </tr>
+    </table>
+        <br />
+        <p><span style="color:red">(*)</span> Giá hoặc khuyến mãi không áp dụng trả góp lãi suất đặc biệt (0%, 0.5%, 1%)</p>
+        <br />
+        @if(Model.Product.quanlity == 0)
+        {
+            <h6 style="font-weight;color:red;text-transform:uppercase">Tạm hết hàng</h6>
+        }
+        else
+        {
+            <h6 style="font-weight;color:green;text-transform:uppercase">Còn hàng</h6>
+        }
+    </div>
+</div>
+}

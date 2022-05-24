@@ -1,0 +1,10 @@
+﻿@model DoAnAdmin.Models.promotion
+
+@if (ViewBag.promPrice == null)
+{
+    <span>@string.Format("{0:0,0}", Session["price"]) <sup>đ</sup></span>
+}
+else
+{ 
+    <span>@string.Format("{0:0,0}", Model.price_after) <sup>đ</sup></span>
+}

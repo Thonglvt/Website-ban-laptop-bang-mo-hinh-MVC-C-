@@ -1,0 +1,56 @@
+﻿@model DoAnAdmin.Models.Description
+
+@{
+    ViewBag.Title = "InsertDescription";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div class="container bg-light" style="font-size:17px;color:black;width:1000px">
+        <div class="card">
+            <div class="card-header">
+                <center> <h5 class="mt-3" style="font-weight:bold; color:blue;text-transform:uppercase"><i class="fab fa-app-store-ios"></i>&nbsp;THÊM MÔ TẢ SẢN PHẨM</h5></center>
+            </div>
+            <div class="card-body">
+                <div class="form-group">
+                    <div class="editor-label mb-1">
+                        Mã sản phẩm:
+                    </div>
+                    @Html.DropDownListFor(model => model.product_id, (IEnumerable<SelectListItem>)ViewBag.ProdID, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.product_id, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <div class="editor-label mb-1">
+                        Chủ đề:
+                    </div>
+                    @Html.TextAreaFor(model => model.title, new { @class = "form-control", placeHolder = "Title", rows = "2" })
+                    @Html.ValidationMessageFor(model => model.title, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <div class="editor-label mb-1">
+                        Nội dung:
+                    </div>
+                    @Html.TextAreaFor(model => model.content, new { @class = "form-control", placeHolder = "Content", rows = "5" })
+                </div>
+                <div class="form-group">
+                    <div class="editor-label mb-1">
+                        Hình:
+                    </div>
+                    @Html.TextBoxFor(model => model.image_, new { @class = "form-control", type = "file" })
+                    @Html.ValidationMessageFor(model => model.image_, "", new { @class = "text-danger" })
+                </div>
+                <center>
+                    <p class="form-group mx-auto ">
+                        <input type="submit" value="Thêm" class="btn btn-primary" />
+                    </p>
+                    <p class="text-danger" style="font-weight:bold">@ViewBag.tb</p>
+                </center>
+                @Html.ActionLink("Back to List", "ProductDescription")
+            </div>
+        </div>
+    </div>
+}

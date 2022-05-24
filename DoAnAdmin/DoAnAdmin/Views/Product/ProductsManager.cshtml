@@ -1,0 +1,116 @@
+﻿@model PagedList.IPagedList<DoAnAdmin.Models.Product>
+@using PagedList.Mvc;
+@using PagedList;
+@{
+    ViewBag.Title = "SanPham";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+
+<br />
+<div class="card container-fluid" style="border-radius:10px">
+    <div class="card-header bg-gradient-light">
+        <center class=""><h5 style="text-transform:uppercase;font-weight:bold">QUẢN LÝ SẢN PHẨM</h5></center>
+    </div>
+    <div class="card-body">
+        @using (Html.BeginForm())
+        {
+            <div class="row container mt-2">
+                <div class="col-4">
+                    <input type="text" class="form-control" placeholder="Search" name="txtSearch" />
+                </div>
+                <div class="col-3">
+                    <select class="form-control" name="TH">
+                        <option value="1">1. Macbook</option>
+                        <option value="2">2. Asus </option>
+                        <option value="3">3. HP</option>
+                        <option value="4">4. Lenovo </option>
+                        <option value="5">5. Acer</option>
+                        <option value="6">6. DELL</option>
+                        <option value="7">7. MSI</option>
+                        <option value="8">8. LG</option>
+                        <option value="9">9. GIGABYTE</option>
+                    </select>
+                </div>
+                <div class="col-1">
+                        @*<input class="btn btn-primary" type="submit" value="Search" />*@
+                    <input type="submit" class="btn btn-primary" value="&#xf002" />
+                </div>
+               
+            </div>
+        }
+        <div class="row">
+            <div class="col-9">
+            </div>
+            <div class="col-3">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="@Url.Action("ProductsManager", "Product")" class="btn btn-secondary btn-sm text-light"> <i class="fas fa-times"></i>&nbsp;Reset</a>
+                <a href="@Url.Action("ProductOver","Product")" class="btn btn-danger btn-sm text-light"> Đã hết</a>
+                <a href="@Url.Action("ProductSelling", "Product")" class="btn btn-success btn-sm text-light"> Bán chạy</a>
+            </div>
+        </div>
+        <table class="table table-bordered table-hover mt-2" style="font-size: 12px; color: black; border-radius: 20px; text-align:center">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Mã#</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Thương hiệu</th>
+                    <th>Số lượng</th>
+                    <th>Đã bán</th>
+                    <th>Đơn giá</th>
+                    <th>Thao tác</th>
+                </tr>
+            </thead>
+
+            @foreach (var item in Model)
+            {
+                var id = item.trademark_id;
+                var trademark = (id == 1) ? "MacBook" : (id == 2) ? "Asus" : (id == 3) ? "HP" : (id == 4) ? "Lenovo"
+                                : (id == 5) ? "Acer" : (id == 6) ? "DELL" : (id == 7) ? "MSI" : (id == 8) ? "LG" : "GIGABYTE";
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.id)
+                    </td>
+                    <td class="w-45">
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        <span class="badge badge-primary" style="font-size:13px">@trademark</span> 
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.quanlity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.purchase)
+                    </td>
+                    <td>
+                        @string.Format("{0:0,0} đ", item.price)
+                        @*<input style="font-size:12px" class="form-control" size="5" type="text" name="txtName" value="@string.Format("{0:0,0}", item.price)" />*@
+                    </td>
+                    <td>
+                        <a href="@Url.Action("ThongSoKyThuat", "Product", new { @id = item.id, @name = item.Name })" style="text-decoration:none;color:black"><i class="fas fa-wrench"></i></a>&nbsp;&nbsp;
+                        @*<a href="@Url.Action("UpdateProduct", "Product", new { @id = item.id })" style="text-decoration:none;color:black"><i class="fas fa-save"></i></a>&nbsp;&nbsp;*@
+                        @*<a href="#" style="text-decoration:none;color:black"><i class="fas fa-plus-square"></i></a>&nbsp;&nbsp;|*@
+                    </td>
+                </tr>
+            }
+
+        </table>
+        <div class="row">
+            <div class="col-2">
+                @Html.PagedListPager(Model, Page => Url.Action("ProductsManager", new { Page }))
+            </div>
+            <div class="col-8">
+            </div>
+            <div class="col-2">
+                <a href="@Url.Action("InsertProduct", "Product")"><input type="button" class="btn btn-link" value="Thêm sản phẩm" style="font-size: 13px; font-weight: bold" /></a>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+
+
+
+

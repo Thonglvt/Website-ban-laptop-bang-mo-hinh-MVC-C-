@@ -1,0 +1,35 @@
+﻿@model IEnumerable<DoAnAdmin.Models.Banner>
+
+@{
+    var dem = 0;
+}
+
+<div id="carouselExampleControls" class="carousel mx-auto" data-ride="carousel">
+    <div class="carousel-inner">
+        @foreach (var item in Model)
+        {
+            if (@dem == 0)
+            {
+                <div class="carousel-item active">
+                    <img src="/Assets/Image/ImageSlidesTop/@item.image_" width="100%" height="100%" alt="Header1" />
+                </div>
+            }
+            else
+            {
+                <div class="carousel-item">
+                    <img src="/Assets/Image/ImageSlidesTop/@item.image_" width="100%" height="100%" alt="Header2" />
+                </div>
+            }
+            dem++;
+        } 
+    </div>
+    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only"></span>
+    </a>
+    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only"></span>
+    </a>
+
+</div>

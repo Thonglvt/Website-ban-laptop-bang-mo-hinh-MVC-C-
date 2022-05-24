@@ -1,0 +1,72 @@
+﻿@*@model IEnumerable<DoAnAdmin.Models.ChiTietPhieuNhap>*@
+@model PagedList.IPagedList<DoAnAdmin.Models.PhieuNhap>
+@using PagedList.Mvc;
+@using PagedList;
+@{
+    ViewBag.Title = "ChiTietPhieuNhap";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+
+
+<div class="card container-fluid" style="border-radius:10px">
+    
+    <div class="card-header bg-gradient-light">
+        <center class=""><h5 style="text-transform:uppercase;font-weight:bold">Quản lý phiếu nhập</h5></center>
+    </div>
+    @using (Html.BeginForm())
+    {
+        <div class="container mt-2">
+            <table class="table">
+                <tr>
+                    <td class="text-muted">Từ khóa:</td>
+                    <td class="text-muted">Từ ngày:</td>
+                    <td class="text-muted">Đến ngày:</td>
+                    <td class="text-muted"></td>
+                </tr>
+                <tr>
+                    <td class="text-muted"><input type="text" class="form-control" placeholder="Search" name="txtSearch" /></td>
+                    <td class="text-muted"><input type="date" class="form-control" name="txtDateS" placeholder="Từ" /></td>
+                    <td class="text-muted"><input type="date" class="form-control" name="txtDateE" placeholder="Đến" /></td>
+                    <td class="text-muted"><input type="submit" class="btn btn-primary" value="&#xf002" /></td>
+                </tr>
+            </table>
+        </div>
+    }
+    <table class="table table-bordered table-hover mt-3" style="font-size: 12px; color: black; border-radius: 20px; text-align:center;">
+        <thead class="thead-dark">
+            <tr>
+                <th>Mã#</th>
+                <th>Mã nhân viên</th>
+                <th>Ngày nhập</th>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.employee_id)
+                </td>
+                <td>
+                    @string.Format("{0:G}", item.date_)
+                </td>
+                <td>
+                    <a href="@Url.Action("ChiTietPhieuNhap", "PhieuNhapXuat", new { @id = item.id })" style="text-decoration:none;color:black"><i class="fas fa-align-justify"></i>&nbsp;Details</a>
+                </td>
+            </tr>
+        }
+    </table>
+    <div class="row">
+        <div class="col-2">
+            @Html.PagedListPager(Model, Page => Url.Action("PhieuNhap", new { Page }))
+        </div>
+        <div class="col-8">
+        </div>
+        <div class="col-2">
+            <a href="@Url.Action("ThemCTPhieuNhap", "PhieuNhapXuat")"><input type="button" class="btn btn-link" value="Thêm đơn nhập" style="font-size:13px; font-weight:bold" /></a>
+        </div>
+    </div>
+</div>

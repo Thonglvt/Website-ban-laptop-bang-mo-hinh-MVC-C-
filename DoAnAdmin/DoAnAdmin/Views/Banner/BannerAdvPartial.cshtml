@@ -1,0 +1,12 @@
+﻿@model IEnumerable<DoAnAdmin.Models.Banner>
+
+
+@* --Image quang cao *@
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-5 mb-2">
+            <a href="href=@Url.Action("GamingSP","TrangChu")"><img src="../Assets/Image/ImageAdvertise/@item.image_" width="95%" alt="Banner5" /></a>
+        </div>
+    }
+</div>

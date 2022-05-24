@@ -1,0 +1,326 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QL_LoptopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ChiTietPhieuNhap">
+    <Key>
+      <PropertyRef Name="PhieuNhap_id" />
+      <PropertyRef Name="product_id" />
+    </Key>
+    <Property Name="PhieuNhap_id" Type="char" MaxLength="16" Nullable="false" />
+    <Property Name="product_id" Type="char" MaxLength="9" Nullable="false" />
+    <Property Name="quanlity" Type="int" />
+    <Property Name="price_Import" Type="int" />
+    <Property Name="ratio" Type="int" />
+  </EntityType>
+  <EntityType Name="ChiTietPhieuXuat">
+    <Key>
+      <PropertyRef Name="phieuXuat_id" />
+    </Key>
+    <Property Name="phieuXuat_id" Type="char" MaxLength="16" Nullable="false" />
+    <Property Name="product_id" Type="char" MaxLength="9" />
+    <Property Name="quanlity" Type="int" />
+    <Property Name="price" Type="int" />
+  </EntityType>
+  <EntityType Name="Clients">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="char" MaxLength="12" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="1000" />
+    <Property Name="birthday" Type="date" />
+    <Property Name="gender" Type="nvarchar" MaxLength="4" />
+    <Property Name="phone" Type="nvarchar" MaxLength="100" />
+    <Property Name="email" Type="nvarchar" MaxLength="100" />
+    <Property Name="cmnd" Type="nvarchar" MaxLength="100" />
+    <Property Name="avatar" Type="nvarchar" MaxLength="1000" />
+    <Property Name="countProducts" Type="int" />
+    <Property Name="totalMoney" Type="int" />
+    <Property Name="username" Type="char" MaxLength="100" />
+    <Property Name="password" Type="char" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="Detail">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="product_id" Type="char" MaxLength="9" />
+    <Property Name="CPU" Type="nvarchar" MaxLength="1000" />
+    <Property Name="SoNhan" Type="nvarchar" MaxLength="100" />
+    <Property Name="SoLuong" Type="nvarchar" MaxLength="100" />
+    <Property Name="Speed" Type="nvarchar" MaxLength="1000" />
+    <Property Name="MaxSpeed" Type="nvarchar" MaxLength="1000" />
+    <Property Name="Cache" Type="nvarchar" MaxLength="1000" />
+    <Property Name="RAM" Type="nvarchar" MaxLength="1000" />
+    <Property Name="RAM_type" Type="nvarchar" MaxLength="1000" />
+    <Property Name="BusRAM" Type="nvarchar" MaxLength="1000" />
+    <Property Name="MaxRAM" Type="nvarchar" MaxLength="1000" />
+    <Property Name="OCung" Type="nvarchar" MaxLength="1000" />
+    <Property Name="ManHinh" Type="nvarchar" MaxLength="1000" />
+    <Property Name="DoPhanGiai" Type="nvarchar" MaxLength="1000" />
+    <Property Name="TanSoQuet" Type="nvarchar" MaxLength="1000" />
+    <Property Name="CongNgheManHinh" Type="nvarchar" MaxLength="1000" />
+    <Property Name="VGA" Type="nvarchar" MaxLength="1000" />
+    <Property Name="AmThanh" Type="nvarchar" MaxLength="1000" />
+    <Property Name="CongGiaoTiep" Type="nvarchar" MaxLength="1000" />
+    <Property Name="KetNoiKhongDay" Type="nvarchar" MaxLength="1000" />
+    <Property Name="Webcam" Type="nvarchar" MaxLength="1000" />
+    <Property Name="TinhNangKhac" Type="nvarchar" MaxLength="1000" />
+    <Property Name="DenBanPhim" Type="nvarchar" MaxLength="1000" />
+    <Property Name="SizeAndWeight" Type="nvarchar" MaxLength="1000" />
+    <Property Name="ChatLieu" Type="nvarchar" MaxLength="1000" />
+    <Property Name="Pin" Type="nvarchar" MaxLength="1000" />
+    <Property Name="HeDieuHanh" Type="nvarchar" MaxLength="1000" />
+    <Property Name="RaMat" Type="nvarchar" MaxLength="1000" />
+  </EntityType>
+  <EntityType Name="Employees">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="char" MaxLength="16" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="1000" />
+    <Property Name="birthday" Type="date" />
+    <Property Name="gender" Type="nvarchar" MaxLength="4" />
+    <Property Name="phone" Type="nvarchar" MaxLength="100" />
+    <Property Name="email" Type="nvarchar" MaxLength="100" />
+    <Property Name="cmnd" Type="nvarchar" MaxLength="100" />
+    <Property Name="salary" Type="int" />
+    <Property Name="avatar" Type="nvarchar" MaxLength="1000" />
+    <Property Name="hire_date" Type="date" />
+  </EntityType>
+  <EntityType Name="Image">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="char" MaxLength="100" Nullable="false" />
+    <Property Name="product_id" Type="char" MaxLength="9" />
+    <Property Name="image_" Type="nvarchar" MaxLength="1000" />
+    <Property Name="active" Type="int" />
+    <Property Name="dateUpdate" Type="date" />
+  </EntityType>
+  <EntityType Name="PhieuNhap">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="char" MaxLength="16" Nullable="false" />
+    <Property Name="employee_id" Type="char" MaxLength="16" />
+    <Property Name="date_" Type="date" />
+  </EntityType>
+  <EntityType Name="PhieuXuat">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="char" MaxLength="16" Nullable="false" />
+    <Property Name="employee_id" Type="char" MaxLength="16" />
+    <Property Name="client_id" Type="char" MaxLength="12" />
+    <Property Name="date_" Type="date" />
+    <Property Name="total" Type="int" />
+  </EntityType>
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="char" MaxLength="9" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="1000" />
+    <Property Name="trademark" Type="nvarchar" MaxLength="100" />
+    <Property Name="quanlity" Type="int" />
+    <Property Name="purchase" Type="int" />
+    <Property Name="price" Type="int" />
+  </EntityType>
+  <EntityType Name="promotions">
+    <Key>
+      <PropertyRef Name="product_id" />
+      <PropertyRef Name="date_start" />
+    </Key>
+    <Property Name="product_id" Type="char" MaxLength="9" Nullable="false" />
+    <Property Name="date_start" Type="date" Nullable="false" />
+    <Property Name="date_end" Type="date" />
+    <Property Name="price" Type="int" />
+    <Property Name="price_after" Type="int" />
+  </EntityType>
+  <EntityType Name="Trademark">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="1000" />
+  </EntityType>
+  <Association Name="FK_CTPN_PN">
+    <End Role="PhieuNhap" Type="Self.PhieuNhap" Multiplicity="1" />
+    <End Role="ChiTietPhieuNhap" Type="Self.ChiTietPhieuNhap" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PhieuNhap">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ChiTietPhieuNhap">
+        <PropertyRef Name="PhieuNhap_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CTPN_Products">
+    <End Role="Products" Type="Self.Products" Multiplicity="1" />
+    <End Role="ChiTietPhieuNhap" Type="Self.ChiTietPhieuNhap" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ChiTietPhieuNhap">
+        <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CTPX_Products">
+    <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+    <End Role="ChiTietPhieuXuat" Type="Self.ChiTietPhieuXuat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ChiTietPhieuXuat">
+        <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CTPX_PX">
+    <End Role="PhieuXuat" Type="Self.PhieuXuat" Multiplicity="1" />
+    <End Role="ChiTietPhieuXuat" Type="Self.ChiTietPhieuXuat" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="PhieuXuat">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ChiTietPhieuXuat">
+        <PropertyRef Name="phieuXuat_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Detail_Products">
+    <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+    <End Role="Detail" Type="Self.Detail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Detail">
+        <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Image_Products">
+    <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+    <End Role="Image" Type="Self.Image" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Image">
+        <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PN_Empl">
+    <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+    <End Role="PhieuNhap" Type="Self.PhieuNhap" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employees">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="PhieuNhap">
+        <PropertyRef Name="employee_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_promotions_Products">
+    <End Role="Products" Type="Self.Products" Multiplicity="1" />
+    <End Role="promotions" Type="Self.promotions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="promotions">
+        <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PX_Client">
+    <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
+    <End Role="PhieuXuat" Type="Self.PhieuXuat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clients">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="PhieuXuat">
+        <PropertyRef Name="client_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PX_Empl">
+    <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+    <End Role="PhieuXuat" Type="Self.PhieuXuat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employees">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="PhieuXuat">
+        <PropertyRef Name="employee_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="auto_idProducts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="id" Type="char" Mode="InOut" />
+  </Function>
+  <Function Name="auto_idProducts2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar" />
+  <Function Name="LayMa" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ma" Type="varchar" Mode="InOut" />
+  </Function>
+  <EntityContainer Name="QL_LoptopModelStoreContainer">
+    <EntitySet Name="ChiTietPhieuNhap" EntityType="Self.ChiTietPhieuNhap" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ChiTietPhieuXuat" EntityType="Self.ChiTietPhieuXuat" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Detail" EntityType="Self.Detail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Image" EntityType="Self.Image" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PhieuNhap" EntityType="Self.PhieuNhap" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PhieuXuat" EntityType="Self.PhieuXuat" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="promotions" EntityType="Self.promotions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Trademark" EntityType="Self.Trademark" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_CTPN_PN" Association="Self.FK_CTPN_PN">
+      <End Role="PhieuNhap" EntitySet="PhieuNhap" />
+      <End Role="ChiTietPhieuNhap" EntitySet="ChiTietPhieuNhap" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CTPN_Products" Association="Self.FK_CTPN_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="ChiTietPhieuNhap" EntitySet="ChiTietPhieuNhap" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CTPX_Products" Association="Self.FK_CTPX_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="ChiTietPhieuXuat" EntitySet="ChiTietPhieuXuat" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CTPX_PX" Association="Self.FK_CTPX_PX">
+      <End Role="PhieuXuat" EntitySet="PhieuXuat" />
+      <End Role="ChiTietPhieuXuat" EntitySet="ChiTietPhieuXuat" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Detail_Products" Association="Self.FK_Detail_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="Detail" EntitySet="Detail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Image_Products" Association="Self.FK_Image_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="Image" EntitySet="Image" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PN_Empl" Association="Self.FK_PN_Empl">
+      <End Role="Employees" EntitySet="Employees" />
+      <End Role="PhieuNhap" EntitySet="PhieuNhap" />
+    </AssociationSet>
+    <AssociationSet Name="FK_promotions_Products" Association="Self.FK_promotions_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="promotions" EntitySet="promotions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PX_Client" Association="Self.FK_PX_Client">
+      <End Role="Clients" EntitySet="Clients" />
+      <End Role="PhieuXuat" EntitySet="PhieuXuat" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PX_Empl" Association="Self.FK_PX_Empl">
+      <End Role="Employees" EntitySet="Employees" />
+      <End Role="PhieuXuat" EntitySet="PhieuXuat" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

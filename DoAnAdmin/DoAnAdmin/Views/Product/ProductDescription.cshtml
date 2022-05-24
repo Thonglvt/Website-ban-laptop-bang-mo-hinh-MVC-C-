@@ -1,0 +1,110 @@
+﻿@model PagedList.IPagedList<DoAnAdmin.Models.Description>
+@using PagedList.Mvc;
+@using PagedList;
+@{
+    ViewBag.Title = "SanPham";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+@{
+    var success = ViewBag.success;
+    var failed = ViewBag.failed;
+}
+
+<br />
+@if (@ViewBag.failed != null)
+{ 
+    <div class="card bg-danger">
+        <span class="text-light">&nbsp;&nbsp;<i class="far fa-times-circle"></i>&nbsp;@ViewBag.failed</span>
+    </div>
+}
+@if (@ViewBag.success != null)
+{
+    <div class="card bg-success">
+        <span class="text-light">&nbsp;&nbsp;<i class="fas fa-check"></i>&nbsp;@ViewBag.success</span> 
+    </div>
+}
+<div class="card container-fluid" style="border-radius:10px">
+    <div class="card-header bg-gradient-light">
+        <center class=""><h5 style="text-transform:uppercase;font-weight:bold">Mô tả SẢN PHẨM</h5></center>
+    </div>
+    <div class="card-body">
+        @using (Html.BeginForm())
+        {
+            <div class="row container mt-2">
+                <div class="col-4">
+                    <input type="text" class="form-control" placeholder="Search" name="txtSearch" />
+                </div>
+                <div class="col-1">
+                    @*<input class="btn btn-primary" type="submit" value="Search" />*@
+                    <input type="submit" class="btn btn-primary" value="&#xf002" />
+                </div>
+
+            </div>
+        }
+        @*<div class="row">
+            <div class="col-9">
+            </div>
+            <div class="col-3">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="@Url.Action("ProductsManager", "Product")" class="btn btn-secondary btn-sm text-light"> <i class="fas fa-times"></i>&nbsp;Reset</a>
+                <a href="@Url.Action("ProductOver","Product")" class="btn btn-danger btn-sm text-light"> Đã hết</a>
+                <a href="@Url.Action("ProductSelling", "Product")" class="btn btn-success btn-sm text-light"> Bán chạy</a>
+            </div>
+        </div>*@
+        <table class="table table-bordered table-hover mt-2" style="font-size: 12px; color: black; border-radius: 20px">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Mã#</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Chủ đề:</th>
+                    <th>Nội dung:</th>
+                    <th>Hình:</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            @foreach (var item in Model)
+            {
+                <tr style="text-align:justify">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.product_id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Product.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.content)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.image_)
+                    </td>
+                    <td>
+                        <a href="@Url.Action("ThongSoKyThuat", "Product", new { @maSP = item.product_id })" style="text-decoration:none;color:black"><i class="fas fa-wrench"></i></a>&nbsp;&nbsp;
+                        <a href="@Url.Action("DeleteDescription", "Product", new { @maSP = item.product_id })" style="text-decoration:none;color:black"><i class="fas fa-backspace"></i></a>&nbsp;&nbsp;
+                    </td>
+                </tr>
+            }
+
+        </table>
+        <div class="row">
+            <div class="col-2">
+                @Html.PagedListPager(Model, Page => Url.Action("ProductsManager", new { Page }))
+            </div>
+            <div class="col-8">
+            </div>
+            <div class="col-2">
+                <a href="@Url.Action("InsertDescription", "Product")"><input type="button" class="btn btn-link" value="Thêm mô tả" style="font-size:13px" /></a>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+
+
+
+

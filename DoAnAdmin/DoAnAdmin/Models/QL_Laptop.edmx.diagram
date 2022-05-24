@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="97e22183873e4596aff0ec183f81b21c" Name="Diagram1">
+        <EntityTypeShape EntityType="QL_LaptopModel.Account" Width="1.5" PointX="1.5" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_LaptopModel.AccountType" Width="1.5" PointX="1.5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_LaptopModel.Banner" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_LaptopModel.ChiTietPhieuNhap" Width="1.5" PointX="8.25" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_LaptopModel.Customer" Width="1.5" PointX="3.75" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_LaptopModel.Description" Width="1.5" PointX="5.25" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_LaptopModel.Detail" Width="1.5" PointX="5.25" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_LaptopModel.Employee" Width="1.5" PointX="3.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_LaptopModel.Image" Width="1.5" PointX="5.25" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_LaptopModel.PhieuNhap" Width="1.5" PointX="6" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_LaptopModel.PhieuXuat" Width="1.5" PointX="6" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_LaptopModel.Product" Width="1.5" PointX="3" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_LaptopModel.promotion" Width="1.5" PointX="5.25" PointY="25.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_LaptopModel.PromotionsGift" Width="1.5" PointX="5.25" PointY="28.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="QL_LaptopModel.Trademark" Width="1.5" PointX="0.75" PointY="15" IsExpanded="true" />
+        <AssociationConnector Association="QL_LaptopModel.FK_Acc_AccType" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_LaptopModel.FK_Customer_Acc" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_LaptopModel.FK_Employees_Acc" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_LaptopModel.FK_CTPN_PN" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_LaptopModel.FK_CTPN_Products" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_LaptopModel.FK_PX_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_LaptopModel.FK_Description_Prod" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_LaptopModel.FK_Detail_Products" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_LaptopModel.FK_PN_Empl" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_LaptopModel.FK_PX_Empl" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_LaptopModel.FK_Image_Products" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_LaptopModel.FK_Products_trademark" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_LaptopModel.FK_promotions_Products" ManuallyRouted="false" />
+        <AssociationConnector Association="QL_LaptopModel.FK_PromotionsGift_Prod" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="QL_LaptopModel.ChiTietPhieuXuat" Width="1.5" PointX="8.25" PointY="10.625" />
+        <AssociationConnector Association="QL_LaptopModel.FK_CTPX_Products" />
+        <AssociationConnector Association="QL_LaptopModel.FK_CTPX_PX" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

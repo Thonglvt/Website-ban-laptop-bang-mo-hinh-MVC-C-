@@ -1,0 +1,119 @@
+﻿@model IEnumerable<DoAnAdmin.Models.ChiTietPhieuXuat>
+@{
+    ViewBag.Title = "ThanhToan";
+    Layout = "~/Views/Shared/_DetailLayoutPage.cshtml";
+}
+
+<div class="container" style="width:1000px;">
+    <a href="@Url.Action("ShowAllProducts","Product")"><i class="fas fa-angle-left"></i>&nbsp; Quay lại trang chủ</a>
+
+    <div class="card mt-1 container ">
+        <div class="card-header">
+            <h6>Đơn hàng của bạn 
+                <span class="text-muted" style="font-size:14px">
+                    (Mã: #@ViewBag.maHD)&nbsp;
+                    <span class="text-success" style="font-size:14px;font-weight:bold">
+                        <i class="far fa-check-circle"></i> Đặt hàng thành công
+                </span>
+            </span>
+            </h6>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered text-center table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Tên sản phẩm</th>
+                        <th>Hình</th>
+                        <th>Số lượng</th>
+                        <th>Đơn giá</th>
+                    </tr>
+                </thead>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @item.Product.Name
+                        </td>
+                        <td style="width:200px">
+                            <img src="/Assets/Image/ImageProduct/@item.Product.avatar" width="50%" />
+                        </td>
+                        <td style="width:100px">
+                            @item.quanlity
+                        </td>
+                        <td>
+                            @string.Format("{0:0,0}", item.price)<sup>đ</sup>
+                        </td>
+                    </tr>
+                }
+            </table>
+            <div class="row mt-1">
+                <div class="col-2">&nbsp;&nbsp;Thành tiền:</div>
+                <div class="col-8"></div>
+                <div class="col-2 text-danger" style="font-weight: bold; text-align: right"> @string.Format("{0:0,0}", ViewBag.total)<sup>đ</sup></div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-2">&nbsp;&nbsp;Đã thanh toán:</div>
+                <div class="col-8"></div>
+                <div class="col-2 text-danger" style="font-weight:bold; text-align:right"> @string.Format("{0:0,0}", "0")<sup>đ</sup></div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-10">&nbsp;&nbsp;Trạng thái:</div>
+                <div class="col-2">&nbsp;<span class="text-danger">Chưa thanh toán</span></div>
+            </div>  
+            <div class="card mt-3">
+                <div class="card-header">
+                    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+                        <li class="nav-item">
+                            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                               aria-expanded="true" aria-controls="collapseUtilities">
+                                @*&nbsp;&nbsp;<i class="fas fa-gift"></i>*@
+                                <span>Thông tin cá nhân</span><span class="text-success">&nbsp;(@ViewBag.tbThanhCong)</span>
+                            </a>
+                            <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                                 data-parent="#accordionSidebar">
+                                <div class="bg-white py-2 collapse-inner rounded">
+                                @using (Html.BeginForm())
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.ValidationSummary(true)
+                                    <table class="table text-center" style="width:700px">
+                                        <tr>
+                                            <td>Họ và tên:</td>
+                                            <td>
+                                                <input type="text" class="form-control" name="txtHoTen" placeholder="Họ và Tên" value="@ViewBag.name"/>
+                                                <span class="text-danger">@ViewBag.tbHoTen</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Số Điện thoại:</td>
+                                            <td>
+                                                <input type="text" class="form-control" name="txtSdt" placeholder="Số điện thoại" value="@ViewBag.phone" />
+                                                <span class="text-danger">@ViewBag.tbSDT</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Địa chỉ nhận hàng:</td>
+                                            <td>
+                                                <textarea class="form-control" name="txtAddress" placeholder="Số nhà, tên đường, Phường/Xã, Quận/Huyện, Tỉnh/Thành Phố">@ViewBag.address</textarea>
+                                                <span class="text-danger">@ViewBag.tbDiaChi</span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>
+                                                <input type="submit" class="btn btn-primary" value="Cập nhật" /><br />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                }
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

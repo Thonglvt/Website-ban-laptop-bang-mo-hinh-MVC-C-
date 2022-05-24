@@ -1,0 +1,57 @@
+﻿@model DoAnAdmin.Models.Detail
+
+
+<table class="table table-bordered">
+    <tr>
+        <td colspan="2"><center style="font-weight:bold">Thông số kỹ thuật</center></td>
+    </tr>
+    <tr class="table-secondary">
+        <td>CPU:</td>
+        <td>@Model.CPU</td>
+    </tr>
+    <tr class="table-light">
+        <td>RAM:</td>
+        <td>@Model.RAM</td>
+    </tr>
+    <tr class="table-secondary">
+        <td>Ổ cứng:</td>
+        <td>@Model.OCung</td>
+    </tr>
+    <tr class="table-light">
+        <td>Màn hình:</td>
+        <td>@Model.ManHinh</td>
+    </tr>
+    <tr class="table-secondary">
+        <td>Card màn hình:</td>
+        <td>@Model.VGA</td>
+    </tr>
+    <tr class="table-light">
+        <td>Cổng kết nối:</td>
+        <td>
+            @{
+                string[] spl = @Model.CongGiaoTiep.Split('|');
+            }
+            @foreach (string s in spl)
+            {
+                <span>- @s</span><br />
+            }
+        </td>
+    </tr>
+    <tr class="table-secondary">
+        <td>Hệ điều hành:</td>
+        <td>@Model.HeDieuHanh</td>
+    </tr>
+    <tr class="table-light">
+        <td>Thiết kế:</td>
+        <td>@Model.ChatLieu</td>
+    </tr>
+    <tr class="table-secondary">
+        <td>Kích thước, trọng lượng:</td>
+        <td>@Model.SizeAndWeight</td>
+    </tr>
+    <tr class="table-light">
+        <td>Thời điểm ra mắt:</td>
+        <td>@Model.RaMat</td>
+    </tr>
+</table>
+

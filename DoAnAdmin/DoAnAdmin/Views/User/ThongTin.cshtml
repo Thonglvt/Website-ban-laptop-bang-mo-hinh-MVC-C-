@@ -1,0 +1,104 @@
+﻿@model DoAnAdmin.Models.Customer
+
+@{
+    ViewBag.Title = "ThongTin";
+    Layout = "~/Views/Shared/_DetailLayoutPage.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            <a href="@Url.Action("ThongTin","User")" class="btn btn-link text-muted" style="text-decoration:none"><i class="far fa-list-alt"></i>&nbsp;Thông tin cá nhân và số địa chỉ</a><br />
+            <a href="#" class="btn btn-link text-muted" style="text-decoration:none"><i class="far fa-user-circle"></i>&nbsp;Danh sách đơn hàng đã mua</a>
+        </div>
+        <div class="col-8">
+            <div class="row">
+                <div class="col-4">
+                    Chào anh <span style="font-weight:bold">@Model.name</span>
+                </div>
+                <div class="col-4">
+
+                </div>
+                <div class="col-4">
+
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="card-header
+                        <p style="text-transform:uppercase;font-size:15px">THÔNG TIN CÁ NHÂN</p>
+                    </div>
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+                        <table class="table">
+                            <tr>
+                                <td>
+                                   @if(Model.gender == "Nam")
+                                   {
+                                       <input type="radio" name="optRadioGender" id="optionsRadiosNam" value="Nam" checked><span>&nbsp;Anh &nbsp;&nbsp;</span>
+                                   }
+                                    else
+                                   {
+                                       <input type="radio" name="optRadioGender" id="optionsRadiosNam" value="Nam"><span>&nbsp;Anh &nbsp;&nbsp;</span>
+                                   }
+                                    @if (Model.gender == "Nữ")
+                                    {
+                                        <input type="radio" name="optRadioGender" id="optionsRadiosNu" value="Nữ" checked><span>&nbsp;Chị &nbsp;&nbsp;</span>
+                                    }
+                                    else
+                                    {
+                                        <input type="radio" name="optRadioGender" id="optionsRadiosNu" value="Nữ"><span>&nbsp;Chị &nbsp;&nbsp;</span>
+                                    }
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                   Họ và tên:
+                                </td>
+                                <td>
+                                    Số điện thoại:
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="text" class="form-control" name="txtHoTen" placeholder="Họ và Tên" value="@Model.name" />
+                                    <span class="text-danger" style="font-size:13px">@ViewBag.tbHoTen</span>
+                                </td>
+                                <td>
+                                    <input type="button" class="btn" name="txtSdt" placeholder="Số điện thoại" value="@Model.phone" />
+                                    <span class="text-danger" style="font-size:13px">@ViewBag.tbSDT</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Email:
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="button" class="form-control" name="txtHoTen" placeholder="Email" value="@Model.email" />
+                                    <span class="text-danger" style="font-size:13px">@ViewBag.tbHoTen</span>
+                                </td>
+                                <td>
+                                    
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <textarea  class="form-control" name="txtAddress" placeholder="Số nhà, tên đường, Phường/Xã, Quận/Huyện, Tỉnh/Thành Phố">@Model.Address</textarea>
+                                    <span class="text-danger" style="font-size:13px">@ViewBag.tbDiaChi</span>
+                                </td>
+                            </tr>
+                        </table>
+                       <center><input class="btn btn-primary" value="Cập nhật" /></center>
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

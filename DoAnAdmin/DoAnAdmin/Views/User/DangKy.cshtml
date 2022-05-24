@@ -1,0 +1,166 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.rawgit.com/PascaleBeier/bootstrap-validate/v2.2.0/dist/bootstrap-validate.js"></script>
+    <style>
+        body {
+            background-color: #f2f0ed;
+        }
+    </style>
+
+    <meta name="viewport" content="width=device-width" />
+    <title>Đăng Ký Tài Khoản</title>
+</head>
+<body>
+
+    <ul class="nav justify-content-center" style="background-color:#ffffff">
+        <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="@Url.Action("ShowAllProducts", "Product")"><img src="../Assets/Image/ImageLogo/Logo1.png" width="170px" height="70px" /></a>
+        </li>
+    </ul>
+    
+    <div class="container mt-5 mb-5">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8 justify-content-center card border ">
+                <h3 class="text-center mt-5">Đăng ký</h3>
+                <br />
+
+                <table class="table table-borderless">
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.ValidationSummary(true)
+                        <tr>
+                            <td>
+                                <center>
+                                    <input type="text" name="name" class="form-control col-md-8" placeholder="Họ và tên" required /> <a style="color:red">@ViewData["Loi1"]</a>
+                                </center>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <center>
+                                    <input type="text" name="username" class="form-control col-md-8" placeholder="Số điện thoại" required /> <a style="color:red">@ViewData["Loi1"]</a>
+                                    <span class="text-danger">@ViewBag.tbAcc</span>
+                                </center>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <center>
+                                    <input type="password" name="password" class="form-control col-md-8" placeholder="Mật khẩu" required /><a style="color:red">@ViewData["Loi2"]</a>
+                                </center>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <center>
+                                    <input type="password" name="repassword" class="form-control col-md-8" placeholder="Nhập lại mật khẩu" required /><a style="color:red">@ViewData["Loi2"]</a>
+                                    <span class="text-danger">@ViewBag.tbPass</span>
+                                </center>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <center>
+                                    <input type="text" name="email" class="form-control col-md-8" placeholder="Email" required /><a style="color:red">@ViewData["Loi2"]</a>
+                                </center>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <center>
+                                    <input type="text" name="address" class="form-control col-md-8" placeholder="Địa chỉ" required /><a style="color:red">@ViewData["Loi2"]</a>
+                                </center>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <center>
+                                    <input type="checkbox" id="check" class="form-check-input " />
+                                    <label for="check" class="form-check-label ml-6 ">Tôi đồng ý với
+                                        <a class="text-decoration-underline" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Điều khoản dịch vụ</a>
+                                         và 
+                                        <a class="text-decoration-underline" data-toggle="collapse" href="#collapseExample1" aria-expanded="false" aria-controls="collapseExample">Chính sách bảo mật</a>
+                                    </label>
+                                    <div class="collapse" id="collapseExample">
+                                        <div class="card card-body">@*Điều khoản dịch vụ*@
+                                        <p><center class="font-weight-bold">Điều khoản dịch vụ</center></p>
+                                            Dù biết rằng bạn rất dễ bỏ qua những Điều khoản dịch vụ này, nhưng chúng tôi cần phải nêu rõ trách nhiệm của chúng tôi cũng như trách nhiệm của bạn trong quá trình bạn sử dụng các dịch vụ của Google.
+                                            Các Điều khoản dịch vụ này phản ánh cách thức kinh doanh của Google, những điều luật mà công ty chúng tôi phải tuân theo và một số điều mà chúng tôi vẫn luôn tin là đúng. Do đó, các Điều khoản dịch vụ này giúp xác định mối quan hệ giữa Google với bạn khi bạn tương tác với các dịch vụ của chúng tôi. Ví dụ: Các điều khoản này trình bày các chủ đề sau:
+
+                                            Trách nhiệm của chúng tôi: Đây là phần mô tả cách chúng tôi cung cấp và phát triển các dịch vụ của mình
+                                            Trách nhiệm của bạn: Phần này nêu ra một số quy tắc mà bạn phải tuân theo khi sử dụng các dịch vụ của chúng tôi
+                                            Nội dung trong các dịch vụ của Google: Phần này mô tả quyền sở hữu trí tuệ đối với nội dung mà bạn thấy trong các dịch vụ của chúng tôi, bất kể nội dung đó thuộc về bạn, Google hay người khác
+                                            Trong trường hợp xảy ra vấn đề hoặc bất đồng: Phần này mô tả các quyền hợp pháp khác mà bạn có và những điều bạn nên biết trong trường hợp có người vi phạm các điều khoản này
+                                            Việc hiểu rõ các điều khoản này là rất quan trọng vì bằng việc sử dụng các dịch vụ của chúng tôi, bạn đồng ý với các điều khoản này.
+
+                                            Bên cạnh các điều khoản này, chúng tôi cũng ban hành Chính sách quyền riêng tư. Mặc dù không nằm trong các điều khoản này, nhưng đây là một chính sách bạn nên đọc để hiểu rõ hơn cách bạn có thể cập nhật, quản lý, xuất và xóa thông tin của mình.
+
+                                            Nhà cung cấp dịch vụ
+                                            Pháp nhân sau đây cung cấp các dịch vụ của Google và ký kết hợp đồng với bạn:
+
+                                            Google LLC
+                                            được thành lập theo luật của tiểu bang Delaware, Hoa Kỳ và hoạt động theo luật pháp Hoa Kỳ
+
+                                            1600 Amphitheatre Parkway
+                                            Mountain View, California 94043
+                                            Hoa Kỳ
+
+                                            Yêu cầu về độ tuổi
+                                            Nếu chưa đủ tuổi để tự quản lý Tài khoản Google theo quy định, bạn phải được cha mẹ hoặc người giám hộ hợp pháp cho phép thì mới có thể sử dụng Tài khoản Google. Vui lòng yêu cầu cha mẹ hoặc người giám hộ hợp pháp cùng bạn đọc các điều khoản này.
+
+                                            Nếu bạn là cha mẹ hoặc người giám hộ hợp pháp và bạn cho phép con bạn sử dụng các dịch vụ này, thì bạn phải tuân theo các điều khoản này và chịu trách nhiệm đối với hoạt động của con bạn trong các dịch vụ đó.
+
+                                            Một số dịch vụ của Google có các yêu cầu bổ sung về độ tuổi như mô tả trong các chính sách và điều khoản bổ sung dành riêng cho từng dịch vụ.
+                                        </div> 
+                                    </div>
+                                    <div class="collapse" id="collapseExample1">
+                                        <div class="card card-body"> @*Chính sách bảo mật*@
+                                            <p><center class="font-weight-bold">Chính sách bảo mật</center></p>
+                                            Khi sử dụng dịch vụ của chúng tôi, bạn tin tưởng cung cấp thông tin của bạn cho chúng tôi. Chúng tôi hiểu rằng đây là một trách nhiệm lớn và chúng tôi nỗ lực bảo vệ thông tin của bạn cũng như để bạn nắm quyền kiểm soát.
+
+                                            Chính sách bảo mật này nhằm mục đích giúp bạn hiểu rõ những thông tin chúng tôi thu thập, lý do chúng tôi thu thập và cách bạn có thể cập nhật, quản lý, xuất và xóa thông tin của mình.
+                                            Bạn có thể sử dụng các dịch vụ của chúng tôi theo nhiều cách khác nhau để quản lý quyền riêng tư của mình. Ví dụ: bạn có thể đăng ký một Tài khoản Google nếu muốn tạo và quản lý những nội dung như email và ảnh, hoặc xem thêm các kết quả tìm kiếm có liên quan. Ngoài ra, bạn có thể sử dụng nhiều dịch vụ của Google khi đã đăng xuất hoặc không cần tạo tài khoản, chẳng hạn như tìm kiếm trên Google hoặc xem các video trên YouTube. Bạn cũng có thể chọn duyệt web ở chế độ riêng tư bằng cách sử dụng Chrome ở Chế độ ẩn danh. Hơn nữa, trên những dịch vụ của chúng tôi, bạn có thể điều chỉnh các mục cài đặt bảo mật để kiểm soát thông tin chúng tôi thu thập và cách thông tin của bạn được sử dụng.
+                                            bạn cung cấp cho chúng tôi thông tin cá nhân bao gồm tên của bạn và mật khẩu. Bạn cũng có thể chọn thêm số điện thoại hoặc thông tin thanh toán vào tài khoản của mình. Ngay cả khi không đăng nhập vào Tài khoản Google, bạn vẫn có thể chọn cung cấp cho chúng tôi thông tin như địa chỉ email để nhận thông tin cập nhật về dịch vụ của chúng tôi.
+
+                                            Chúng tôi cũng thu thập nội dung bạn tạo, tải lên hoặc nhận được từ những người khác khi bạn sử dụng các dịch vụ của chúng tôi. Nội dung này bao gồm những thứ như email bạn viết và nhận, ảnh và video bạn lưu, tài liệu và bảng tính bạn tạo cũng như các nhận xét bạn viết về những video trên YouTube.
+                                        </div> 
+                                    </div>
+                                </center>
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <center>
+                                    <a href="#"><input class="btn btn-danger btn-block text-white col-md-8" type="submit" value="Đăng Ký Ngay" onclick="xl()"></a>
+                                </center>
+                            </td>
+                        </tr>
+                    }
+                </table>
+                <div class="spinner-grow text-danger" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+              
+                
+                <h3 class="table rounded " style="color:red;text-align:center;">@ViewBag.TB</h3>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+
+</body>
+</html>

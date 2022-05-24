@@ -1,0 +1,87 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.rawgit.com/PascaleBeier/bootstrap-validate/v2.2.0/dist/bootstrap-validate.js"></script>
+    <style>
+        body {
+            background-color: #f2f0ed;
+        }
+    </style>
+
+    <meta name="viewport" content="width=device-width" />
+    <title>Đăng Nhập</title>
+</head>
+<body>
+    <ul class="nav justify-content-center" style="background-color:#ffffff">
+        <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="@Url.Action("ShowAllProducts","Product")"><img src="../Assets/Image/ImageLogo/Logo1.png" width="170px" height="70px" /></a>
+        </li>
+    </ul>
+
+    <div class="container mt-5 mb-5">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8 justify-content-center card border ">
+                <h3 class="text-center mt-5">Đăng nhập</h3>
+                <br />
+                <p class="text-center">Đăng nhập với tài khoản T&T Mobile</p>
+                <table class="table table-borderless">
+                    @using (Html.BeginForm())
+                    {
+
+                        @Html.ValidationSummary(true)
+
+                        <tr>
+                            <td><input type="text" name="username" class="form-control" placeholder="Tài khoản T&T Mobile hoặc số điện thoại" required /> <a style="color:red">@ViewData["Loi1"]</a> </td>
+                        </tr>
+                        <tr>
+                            <td><input type="password" name="password" class="form-control" placeholder="Mật khẩu" required /><a style="color:red">@ViewData["Loi2"]</a></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="checkbox" id="check" class="form-check-input ml-2" />
+                                <label for="check" class="form-check-label ml-4">Remember Password</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a><input class="btn btn-danger btn-block text-white" type="submit" value="Đăng Nhập Ngay" onclick="xl()"></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <p class="text-center ">-------------------hoặc------------------- </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <a href="@Url.Action("DangKy","User")"><input type="button" value="Tạo tài khoản mới" class="btn btn-dark btn-block text-white" /></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <center>@Html.ActionLink("Quên mật khẩu ?", "DangKy", "TaiKhoan")</center>
+                            </td>
+                        </tr>    
+                    }
+                </table>
+                @*<center>@Html.ActionLink("Quay lại trang chủ", "ShowAllProducts", "Product")</center>*@
+                <h6 class="table rounded " style="color:red;text-align:center;">@ViewBag.TB</h6>
+                <h6 class="table rounded " style="color:green;text-align:center;">@ViewBag.TBThanhCong</h6>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+    </div>
+</body>
+
+</html>

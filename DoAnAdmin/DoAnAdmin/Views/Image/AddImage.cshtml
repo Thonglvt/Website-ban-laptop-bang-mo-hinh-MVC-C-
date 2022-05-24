@@ -1,0 +1,60 @@
+﻿@model DoAnAdmin.Models.Image
+
+@{
+    ViewBag.Title = "AddImage";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div class="container bg-light border" style="font-size:17px;color:black;width:850px">
+        <center> <h3 class="mt-3" style="font-weight:bold; color:blue;">THÊM HÌNH ẢNH</h3></center>
+        <div class="form-group">
+            <div class="editor-label">
+                Mã sản phẩm
+            </div>
+            @Html.DropDownListFor(model => model.product_id, (IEnumerable<SelectListItem>)ViewBag.ProdID, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.product_id, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            <div class="editor-label">
+                Url
+            </div>
+            @Html.TextBoxFor(model => model.image_, new { @class = "form-control", type = "file" })
+            @Html.ValidationMessageFor(model => model.image_, "", new { @class = "text-danger" })
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.active)
+        </div>
+        <div class="form-group">
+            @Html.EditorFor(model => model.active)
+            @Html.ValidationMessageFor(model => model.active, "", new { @class = "text-danger" })
+        </div>
+        @*<div class="form-group">
+            Ngày cập nhật
+            @Html.TextBoxFor(model => model.dateUpdate, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.dateUpdate, "", new { @class = "text-danger" })
+        </div>*@
+        <center>
+            <p class="form-group mx-auto">
+                <input type="submit" value="Add" class="btn btn-primary" />
+            </p>
+        </center>
+        @if(ViewBag.tb == 1)
+        { 
+            <p style="color:green;font-weight:bold">Thêm thành công.</p>
+        }
+        else if (ViewBag.tb == 0)
+        {
+            <p style="color: red; font-weight: bold">Thêm thất bại (Ảnh của sản phẩm này đã tồn tại).</p>
+        }
+        @Html.ActionLink("Back to List", "ImagesProduct")
+    </div>
+}
+
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@

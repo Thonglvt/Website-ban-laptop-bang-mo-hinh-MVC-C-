@@ -1,0 +1,81 @@
+﻿@model PagedList.IPagedList<DoAnAdmin.Models.promotion>
+@using PagedList.Mvc;
+@using PagedList;
+
+@{
+    ViewBag.Title = "PromotionPrice";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header">
+            <center class=""><h5 style="text-transform:uppercase;font-weight:bold">GIÁ KHUYẾN MÃI</h5></center>
+        </div>
+        <div class="card-body">
+            @using (Html.BeginForm())
+            {
+                <div class="row container mt-2">
+                    <div class="col-5">
+                        <input type="text" class="form-control" placeholder="Search" name="txtSearch" />
+                    </div>
+                    <div class="col-1">
+                        <input type="submit" class="btn btn-primary" value="Search" />
+                    </div>
+                    <div class="col-2">
+                        <a href="@Url.Action("AddPromotionPrice", "Promotion")">    <input type="button" class="btn btn-primary btn-link" value="Thêm khuyến mãi" style="font-size:13px" /></a>
+                    </div>
+                </div>
+            }
+            <table class="table table-bordered table-hover mt-3" style="text-align:center;font-size:14px">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Mã sản phẩm</th>
+                        <th>Ngày bắt đầu</th>
+                        <th>Ngày kết thúc</th>
+                        <th>Giảm giá</th>
+                        <th>Giá trước giảm</th>
+                        <th>Giá sau giảm</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.product_id)
+                        </td>
+                        <td>
+                            @string.Format("{0:G}", item.date_start)
+                        </td>
+                        <td>
+                            @if (DateTime.Now > item.date_end)
+                            {  
+                            <i class="badge badge-danger">@string.Format("{0:G}", item.date_end) (hết hạn)</i> 
+                            
+                            }
+                                else
+                            { 
+                            <i class="badge badge-success">@string.Format("{0:G}", item.date_end)</i> 
+                            }
+                        </td>
+                        <td>
+                            @string.Format("{0:0,0}", item.price)<sup>đ</sup>
+                        </td>
+                        <td>
+                            <span style="text-decoration:line-through">@string.Format("{0:0,0}", item.Product.price)<sup>đ</sup></span> 
+                        </td>
+                        <td>
+                            <i class="badge badge-info">@string.Format("{0:0,0}", item.price_after)<sup>đ</sup></i> 
+                        </td>
+                        <td>
+                            <a href="@Url.Action("UpdatePromotionPrice", "Promotion", new { @maSP = item.product_id, @dateS = item.date_start,@dateE = item.date_end,@price = item.price })" style="text-decoration:none;color:black"><i class="fas fa-edit"></i>&nbsp;Edit</a>&nbsp;|
+                            <a href="@Url.Action("DeletePromotionPrice", "Promotion", new { @maSP = item.product_id, @dateS = item.date_start })" style="text-decoration:none;color:red"><i class="far fa-trash-alt"></i>&nbsp;Delete</a>
+                        </td>
+                    </tr>
+                }
+            </table>
+            @Html.PagedListPager(Model, Page => Url.Action("PromotionPrice", new { Page }))
+        </div>
+    </div>
+</div>

@@ -1,0 +1,115 @@
+﻿@model PagedList.IPagedList<DoAnAdmin.Models.Customer>
+@using PagedList.Mvc;
+@using PagedList;
+
+@{
+    ViewBag.Title = "CustomerManager";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+
+<br />
+<div class="card container-fluid" style="border-radius:10px">
+    <div class="card-header bg-gradient-light">
+        <center class=""><h5 style="text-transform:uppercase;font-weight:bold">KHÁCH HÀNG</h5></center>
+    </div>
+    <div class="card-body">
+        @using (Html.BeginForm())
+        {
+            <div class="row container mt-2">
+                <div class="col-4">
+                    <input type="text" class="form-control" placeholder="Search" name="txtSearch" />
+                </div>
+                <div class="col-1">
+                    @*<input class="btn btn-primary" type="submit" value="Search" />*@
+                    <input type="submit" class="btn btn-primary" value="&#xf002" />
+                </div>
+
+            </div>
+        }
+        @*<div class="row">
+            <div class="col-9">
+            </div>
+            <div class="col-3">
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="@Url.Action("ProductsManager", "Product")" class="btn btn-secondary btn-sm text-light"> <i class="fas fa-times"></i>&nbsp;Reset</a>
+                <a href="@Url.Action("ProductOver","Product")" class="btn btn-danger btn-sm text-light"> Đã hết</a>
+                <a href="@Url.Action("ProductSelling", "Product")" class="btn btn-success btn-sm text-light"> Bán chạy</a>
+            </div>
+        </div>*@
+        <table class="table table-bordered table-hover mt-2" style="font-size: 12px; color: black; border-radius: 20px; text-align:center">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Mã#</th>
+                    <th>Họ và tên</th>
+                    <th>Ngày sinh</th>
+                    <th>Giới tính</th>
+                    <th>Số điện thoại</th>
+                    <th>Email</th>
+                    <th>CMND</th>
+                    <th>Hình</th>
+                    <th>Sản phẩm đã mua</th>
+                    <th>Tổng tiền</th>
+                    <th>Username</th>
+                    <th>Địa chỉ</th>
+                </tr>
+            </thead>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.id)
+                    </td>
+                    <td class="w-45">
+                        @Html.DisplayFor(modelItem => item.name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.birthday)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.gender)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.phone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.cmnd)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.avatar)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.countProducts)
+                    </td>
+                    <td>
+                        @string.Format("{0:0,0} đ", item.totalMoney)
+                    </td>
+                    <td>
+                        <span class="badge badge-danger" style="font-size:11px">@item.username</span>
+                    </td>
+                    <td>
+                        <a href="@Url.Action("ThongSoKyThuat", "Product", new { @id = item.id, @name = item.name })" style="text-decoration:none;color:black"><i class="fas fa-wrench"></i></a>&nbsp;&nbsp;
+                        @*<a href="@Url.Action("UpdateProduct", "Product", new { @id = item.id })" style="text-decoration:none;color:black"><i class="fas fa-save"></i></a>&nbsp;&nbsp;*@
+                        @*<a href="#" style="text-decoration:none;color:black"><i class="fas fa-plus-square"></i></a>&nbsp;&nbsp;|*@
+                    </td>
+                </tr>
+            }
+
+        </table>
+        <div class="row">
+            <div class="col-2">
+                @Html.PagedListPager(Model, Page => Url.Action("CustomerManager", new { Page }))
+            </div>
+            <div class="col-8">
+            </div>
+            <div class="col-2">
+                <a href="@Url.Action("InsertProduct", "Product")"><input type="button" class="btn btn-link" value="Thêm khách hàng" style="font-size: 13px; font-weight: bold" /></a>
+            </div>
+        </div>
+    </div>
+</div>
+<br />

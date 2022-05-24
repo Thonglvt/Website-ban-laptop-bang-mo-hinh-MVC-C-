@@ -1,0 +1,59 @@
+﻿@model DoAnAdmin.Models.Image
+
+@{
+    ViewBag.Title = "UpdateImage";
+    Layout = "~/Views/Shared/_LayoutPageAdmin.cshtml";
+}
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div class="container bg-light border" style="font-size:17px;color:black;width:500px">
+        <center> <h5 class="mt-3" style="font-weight:bold; color:blue;">CẬP NHẬT HÌNH ẢNH</h5></center>
+        <div class="form-group">
+            <div class="editor-label">
+                Mã sản phẩm
+            </div>
+            @if (Session["ProdID"] != null)
+            {
+                <input type="button" name="txtDateUp" value="@Session["ProdID"]" class="form-control" />
+            }
+            @*@Html.DropDownListFor(model => model.product_id, (IEnumerable<SelectListItem>)ViewBag.ProdID, new { @class="form-control",style="width:300px"})*@
+        </div>
+        <div class="form-group">
+            <div class="editor-label">
+                Url
+            </div>
+            <input type="button" name="txtUrl" value="@ViewBag.url" class="form-control" />
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.active)
+        </div>
+        <div class="form-group">
+            @Html.DropDownListFor(model => model.product_id, (IEnumerable<SelectListItem>)ViewBag.Active, new { @class = "form-control", style = "width:100px" })
+        </div>
+        <div class="editor-label">
+            Ngày cập nhật
+        </div>
+        <div class="form-group">
+            <input type="button" name="txtDateUp" value="@ViewBag.dateUp" class="form-control" />
+        </div>
+        @*<div class="form-group">
+            Ngày cập nhật
+            @Html.TextBoxFor(model => model.dateUpdate, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.dateUpdate, "", new { @class = "text-danger" })
+        </div>*@
+        <center>
+            <p class="form-group mx-auto">
+                <input type="submit" value="Update" class="btn btn-primary" />
+            </p>
+        </center>
+        <h4 style="color:red">@ViewBag.tb</h4>
+        @Html.ActionLink("Back to List", "ImagesProduct")
+    </div>
+}
+
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@

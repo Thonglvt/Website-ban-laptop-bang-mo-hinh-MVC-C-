@@ -1,0 +1,359 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QL_LoptopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="ChiTietPhieuNhap">
+    <Key>
+      <PropertyRef Name="PhieuNhap_id" />
+      <PropertyRef Name="product_id" />
+    </Key>
+    <Property Name="PhieuNhap_id" Type="String" MaxLength="16" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="product_id" Type="String" MaxLength="9" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="quanlity" Type="Int32" />
+    <Property Name="price_Import" Type="Int32" />
+    <Property Name="ratio" Type="Int32" />
+    <NavigationProperty Name="PhieuNhap" Relationship="Self.FK_CTPN_PN" FromRole="ChiTietPhieuNhap" ToRole="PhieuNhap" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_CTPN_Products" FromRole="ChiTietPhieuNhap" ToRole="Products" />
+  </EntityType>
+  <EntityType Name="ChiTietPhieuXuat">
+    <Key>
+      <PropertyRef Name="phieuXuat_id" />
+    </Key>
+    <Property Name="phieuXuat_id" Type="String" MaxLength="16" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="product_id" Type="String" MaxLength="9" FixedLength="true" Unicode="false" />
+    <Property Name="quanlity" Type="Int32" />
+    <Property Name="price" Type="Int32" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_CTPX_Products" FromRole="ChiTietPhieuXuat" ToRole="Products" />
+    <NavigationProperty Name="PhieuXuat" Relationship="Self.FK_CTPX_PX" FromRole="ChiTietPhieuXuat" ToRole="PhieuXuat" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="String" MaxLength="12" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="birthday" Type="DateTime" Precision="0" />
+    <Property Name="gender" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+    <Property Name="phone" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="cmnd" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="avatar" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="countProducts" Type="Int32" />
+    <Property Name="totalMoney" Type="Int32" />
+    <Property Name="username" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="100" FixedLength="true" Unicode="false" />
+    <NavigationProperty Name="PhieuXuats" Relationship="Self.FK_PX_Customer" FromRole="Customer" ToRole="PhieuXuat" />
+  </EntityType>
+  <EntityType Name="Detail">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="product_id" Type="String" MaxLength="9" FixedLength="true" Unicode="false" />
+    <Property Name="CPU" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="SoNhan" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="SoLuong" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Speed" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="MaxSpeed" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="Cache" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="RAM" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="RAM_type" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="BusRAM" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="MaxRAM" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="OCung" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="ManHinh" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="DoPhanGiai" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="TanSoQuet" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="CongNgheManHinh" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="VGA" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="AmThanh" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="CongGiaoTiep" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="KetNoiKhongDay" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="Webcam" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="TinhNangKhac" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="DenBanPhim" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="SizeAndWeight" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="ChatLieu" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="Pin" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="HeDieuHanh" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="RaMat" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_Detail_Products" FromRole="Detail" ToRole="Products" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="String" MaxLength="16" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="name" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="birthday" Type="DateTime" Precision="0" />
+    <Property Name="gender" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+    <Property Name="phone" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="cmnd" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="salary" Type="Int32" />
+    <Property Name="avatar" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="hire_date" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="PhieuNhaps" Relationship="Self.FK_PN_Empl" FromRole="Employees" ToRole="PhieuNhap" />
+    <NavigationProperty Name="PhieuXuats" Relationship="Self.FK_PX_Empl" FromRole="Employees" ToRole="PhieuXuat" />
+  </EntityType>
+  <EntityType Name="Image">
+    <Key>
+      <PropertyRef Name="product_id" />
+      <PropertyRef Name="image_" />
+    </Key>
+    <Property Name="product_id" Type="String" MaxLength="9" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="image_" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="active" Type="Boolean" />
+    <Property Name="dateUpdate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_Image_Products" FromRole="Image" ToRole="Products" />
+  </EntityType>
+  <EntityType Name="PhieuNhap">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="String" MaxLength="16" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="employee_id" Type="String" MaxLength="16" FixedLength="true" Unicode="false" />
+    <Property Name="date_" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="ChiTietPhieuNhaps" Relationship="Self.FK_CTPN_PN" FromRole="PhieuNhap" ToRole="ChiTietPhieuNhap" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK_PN_Empl" FromRole="PhieuNhap" ToRole="Employees" />
+  </EntityType>
+  <EntityType Name="PhieuXuat">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="String" MaxLength="16" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="employee_id" Type="String" MaxLength="16" FixedLength="true" Unicode="false" />
+    <Property Name="customer_id" Type="String" MaxLength="12" FixedLength="true" Unicode="false" />
+    <Property Name="date_" Type="DateTime" Precision="0" />
+    <Property Name="total" Type="Int32" />
+    <NavigationProperty Name="ChiTietPhieuXuat" Relationship="Self.FK_CTPX_PX" FromRole="PhieuXuat" ToRole="ChiTietPhieuXuat" />
+    <NavigationProperty Name="Customer" Relationship="Self.FK_PX_Customer" FromRole="PhieuXuat" ToRole="Customer" />
+    <NavigationProperty Name="Employee" Relationship="Self.FK_PX_Empl" FromRole="PhieuXuat" ToRole="Employees" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="String" MaxLength="9" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="trademark" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="quanlity" Type="Int32" />
+    <Property Name="purchase" Type="Int32" />
+    <Property Name="price" Type="Int32" />
+    <Property Name="trademark_id" Type="Int32" />
+    <NavigationProperty Name="ChiTietPhieuNhaps" Relationship="Self.FK_CTPN_Products" FromRole="Products" ToRole="ChiTietPhieuNhap" />
+    <NavigationProperty Name="ChiTietPhieuXuats" Relationship="Self.FK_CTPX_Products" FromRole="Products" ToRole="ChiTietPhieuXuat" />
+    <NavigationProperty Name="Details" Relationship="Self.FK_Detail_Products" FromRole="Products" ToRole="Detail" />
+    <NavigationProperty Name="Images" Relationship="Self.FK_Image_Products" FromRole="Products" ToRole="Image" />
+    <NavigationProperty Name="Trademark1" Relationship="Self.FK_Products_trademark" FromRole="Products" ToRole="Trademark" />
+    <NavigationProperty Name="promotions" Relationship="Self.FK_promotions_Products" FromRole="Products" ToRole="promotions" />
+    <Property Name="avatar" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="promotion">
+    <Key>
+      <PropertyRef Name="product_id" />
+      <PropertyRef Name="date_start" />
+    </Key>
+    <Property Name="product_id" Type="String" MaxLength="9" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="date_start" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="date_end" Type="DateTime" Precision="0" />
+    <Property Name="price" Type="Int32" />
+    <Property Name="price_after" Type="Int32" />
+    <NavigationProperty Name="Product" Relationship="Self.FK_promotions_Products" FromRole="promotions" ToRole="Products" />
+  </EntityType>
+  <EntityType Name="Trademark">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Products" Relationship="Self.FK_Products_trademark" FromRole="Trademark" ToRole="Products" />
+  </EntityType>
+  <Association Name="FK_CTPN_PN">
+    <End Role="PhieuNhap" Type="Self.PhieuNhap" Multiplicity="1" />
+    <End Role="ChiTietPhieuNhap" Type="Self.ChiTietPhieuNhap" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PhieuNhap">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ChiTietPhieuNhap">
+        <PropertyRef Name="PhieuNhap_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CTPN_Products">
+    <End Role="Products" Type="Self.Product" Multiplicity="1" />
+    <End Role="ChiTietPhieuNhap" Type="Self.ChiTietPhieuNhap" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ChiTietPhieuNhap">
+        <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CTPX_Products">
+    <End Role="Products" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="ChiTietPhieuXuat" Type="Self.ChiTietPhieuXuat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ChiTietPhieuXuat">
+        <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CTPX_PX">
+    <End Role="PhieuXuat" Type="Self.PhieuXuat" Multiplicity="1" />
+    <End Role="ChiTietPhieuXuat" Type="Self.ChiTietPhieuXuat" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="PhieuXuat">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="ChiTietPhieuXuat">
+        <PropertyRef Name="phieuXuat_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PX_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="PhieuXuat" Type="Self.PhieuXuat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="PhieuXuat">
+        <PropertyRef Name="customer_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Detail_Products">
+    <End Role="Products" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="Detail" Type="Self.Detail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Detail">
+        <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PN_Empl">
+    <End Role="Employees" Type="Self.Employee" Multiplicity="0..1" />
+    <End Role="PhieuNhap" Type="Self.PhieuNhap" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employees">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="PhieuNhap">
+        <PropertyRef Name="employee_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PX_Empl">
+    <End Role="Employees" Type="Self.Employee" Multiplicity="0..1" />
+    <End Role="PhieuXuat" Type="Self.PhieuXuat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employees">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="PhieuXuat">
+        <PropertyRef Name="employee_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Image_Products">
+    <End Role="Products" Type="Self.Product" Multiplicity="1" />
+    <End Role="Image" Type="Self.Image" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Image">
+        <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Products_trademark">
+    <End Role="Trademark" Type="Self.Trademark" Multiplicity="0..1" />
+    <End Role="Products" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Trademark">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="trademark_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_promotions_Products">
+    <End Role="Products" Type="Self.Product" Multiplicity="1" />
+    <End Role="promotions" Type="Self.promotion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="promotions">
+        <PropertyRef Name="product_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="QL_LoptopEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ChiTietPhieuNhaps" EntityType="Self.ChiTietPhieuNhap" />
+    <EntitySet Name="ChiTietPhieuXuats" EntityType="Self.ChiTietPhieuXuat" />
+    <EntitySet Name="Customers" EntityType="Self.Customer" />
+    <EntitySet Name="Details" EntityType="Self.Detail" />
+    <EntitySet Name="Employees" EntityType="Self.Employee" />
+    <EntitySet Name="Images" EntityType="Self.Image" />
+    <EntitySet Name="PhieuNhaps" EntityType="Self.PhieuNhap" />
+    <EntitySet Name="PhieuXuats" EntityType="Self.PhieuXuat" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="promotions" EntityType="Self.promotion" />
+    <EntitySet Name="Trademarks" EntityType="Self.Trademark" />
+    <AssociationSet Name="FK_CTPN_PN" Association="Self.FK_CTPN_PN">
+      <End Role="PhieuNhap" EntitySet="PhieuNhaps" />
+      <End Role="ChiTietPhieuNhap" EntitySet="ChiTietPhieuNhaps" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CTPN_Products" Association="Self.FK_CTPN_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="ChiTietPhieuNhap" EntitySet="ChiTietPhieuNhaps" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CTPX_Products" Association="Self.FK_CTPX_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="ChiTietPhieuXuat" EntitySet="ChiTietPhieuXuats" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CTPX_PX" Association="Self.FK_CTPX_PX">
+      <End Role="PhieuXuat" EntitySet="PhieuXuats" />
+      <End Role="ChiTietPhieuXuat" EntitySet="ChiTietPhieuXuats" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PX_Customer" Association="Self.FK_PX_Customer">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="PhieuXuat" EntitySet="PhieuXuats" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Detail_Products" Association="Self.FK_Detail_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="Detail" EntitySet="Details" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PN_Empl" Association="Self.FK_PN_Empl">
+      <End Role="Employees" EntitySet="Employees" />
+      <End Role="PhieuNhap" EntitySet="PhieuNhaps" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PX_Empl" Association="Self.FK_PX_Empl">
+      <End Role="Employees" EntitySet="Employees" />
+      <End Role="PhieuXuat" EntitySet="PhieuXuats" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Image_Products" Association="Self.FK_Image_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="Image" EntitySet="Images" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Products_trademark" Association="Self.FK_Products_trademark">
+      <End Role="Trademark" EntitySet="Trademarks" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_promotions_Products" Association="Self.FK_promotions_Products">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="promotions" EntitySet="promotions" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,13 @@
+﻿@model DoAnAdmin.Models.Description
+
+@if (ViewBag.tb =="1")
+{ 
+    <h5>@Model.title</h5><br />
+    <img src="/Assets/Image/ImageDescription/@Model.image_" width="90%"/>
+    <p class="mt-5 text-justify">@Model.content</p>
+
+}
+else
+{
+    <p>@ViewBag.tb</p>
+}
