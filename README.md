@@ -18,7 +18,7 @@
   **Trang chủ**
   ![image](https://user-images.githubusercontent.com/88954378/170069045-35982b03-5d6b-45ea-8a66-45bc912d2e16.png)
   **Giỏ hàng**
-  ![image](https://user-images.githubusercontent.com/88954378/170069415-a33a0632-d0c1-4044-8f89-005b44a3b953.png)
+  ![image](https://user-images.githubusercontent.com/88954378/170070010-fae619e3-df32-4c09-922e-4f0c702e94cd.png)
 **Hướng dẫn cài đặt**
  - Cơ sở dữ liệu:
     + B1: Vào SQL Server Management Studio
