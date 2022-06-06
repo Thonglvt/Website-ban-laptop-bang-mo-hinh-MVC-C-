@@ -20,6 +20,7 @@ namespace DoAnAdmin.Controllers
         }
         public ActionResult LogoPartial()
         {
+            string a = string.Format("{0:0,0 VNĐ}", 200000);
             var logo = db.Banners.SingleOrDefault(b => b.BannerType.Trim() == "Logo" && b.active == true);
             if(logo == null)
                 ViewBag.logo = "NO Image";
