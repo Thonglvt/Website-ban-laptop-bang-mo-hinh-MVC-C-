@@ -41,5 +41,12 @@ namespace DoAnAdmin.Models
         public virtual DbSet<PromotionsGift> PromotionsGifts { get; set; }
         public virtual DbSet<Trademark> Trademarks { get; set; }
         public virtual DbSet<ChiTietPhieuXuat> ChiTietPhieuXuats { get; set; }
+        public virtual DbSet<tblMenu> tblMenus { get; set; }
+        public virtual DbSet<tblNguoiDungNhomNguoiDung> tblNguoiDungNhomNguoiDungs { get; set; }
+        public virtual DbSet<tblNhomNguoiDung> tblNhomNguoiDungs { get; set; }
+        public virtual DbSet<tblPhanQuyen> tblPhanQuyens { get; set; }
+        public virtual DbSet<tblPhuongXa> tblPhuongXas { get; set; }
+        public virtual DbSet<tblQuanHuyen> tblQuanHuyens { get; set; }
+        public virtual DbSet<tblTinhThanhPho> tblTinhThanhPhoes { get; set; }
     }
 }

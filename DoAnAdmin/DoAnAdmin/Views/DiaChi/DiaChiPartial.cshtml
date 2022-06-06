@@ -1,0 +1,158 @@
+﻿@model DoAnAdmin.Models.DiaChiClass
+
+<div class="card mt-3" style="width: 100%;background-color:#f7f4f4">
+    <div class="card-body">
+        <p>Chọn địa chỉ giao hàng:</p>
+        <div class="row mt-1" >
+            <div class="col-md-6 mb-2">
+                @if (ViewBag.ThanhPhoList != null)
+                {
+                    <select id="OptionsTTP" name="OptionsTTP" class="form-select text-primary" required aria-label="select example" required>
+
+                        <option selected disabled value="">Chọn Tỉnh/Thành phố</option>
+                        @foreach (var item in ViewBag.ThanhPhoList)
+                        {
+                            <option value="@item.Value">@item.Text</option>
+                        }
+                    </select>
+                    <div class="invalid-feedback">
+                        Vui lòng chọn Tỉnh/TP.
+                    </div>
+                    @*@Html.DropDownList("OptionsTTP", ViewBag.ThanhPhoList as SelectList, "Chọn Tỉnh/Thành phố", new { @class = "form-control text-primary" })*@
+                    @*if (Session["tbTTP"] != null)
+            {
+            <span class="text-danger" style="font-size:13px">@Session["tbTTP"]</span>
+            }*@
+                    @*@Html.DropDownListFor(model => model.MaTinhThanhPho, ViewBag.ThanhPhoList as SelectList, "Chọn Tỉnh/Thành phố", new { @class = "form-control text-primary" })
+            @Html.ValidationMessageFor(model => model.MaTinhThanhPho, "Vui lòng chọn Tỉnh/TP", new { @class = "text-danger", @style = "font-size:12px" })*@
+                }
+            </div>
+            <div class="col-md-6 mb-2">
+                <select id="OptionsQH" name="OptionsQH" class="form-select text-primary" required aria-label="select example" required>
+                    <option selected disabled value="">Chọn Quận/Huyện</option>
+                </select>
+                <div class="invalid-feedback">
+                    Vui lòng chọn Quận/Huyện!
+                </div>
+               @* @Html.DropDownList("OptionsQH", new SelectList(""), "Chọn Quận/Huyện", new { @class = "form-control text-primary" })*@
+                @*@if (Session["tbQH"] != null)
+        {
+        <span class="text-danger" style="font-size:13px">@Session["tbQH"]</span>
+        }*@
+                @*@Html.DropDownListFor(model => model.MaQuanHuyen, new SelectList(""), "Chọn Quận/Huyện", new { @class = "form-control text-primary" })
+        @Html.ValidationMessageFor(model => model.MaQuanHuyen, "Vui lòng chọn Quận/Huyện", new { @class = "text-danger", @style = "font-size:12px" })*@
+            </div>
+        </div>
+        <div class="row mt-1">
+            <div class="col-md-6 mb-2">
+                <select id="OptionsPX" name="OptionsPX" class="form-select text-primary" required aria-label="select example" required>
+                    <option selected disabled value="">Chọn Phường/Xã</option>
+                </select>
+                <div class="invalid-feedback">
+                    Vui lòng chọn Phường/Xã!
+                </div>
+                @*@Html.DropDownList("OptionsPX", new SelectList(""), "Chọn Phường/Xã", new { @class = "form-control text-primary" })*@
+                @*@if (Session["tbPX"] != null)
+        {
+            <span class="text-danger" style="font-size:13px">@Session["tbPX"]</span>
+        }*@
+                @*@Html.DropDownListFor(model => model.MaPhuongXa, new SelectList(""), "Chọn Phường/Xã", new { @class = "form-control text-primary" })
+        @Html.ValidationMessageFor(model => model.MaPhuongXa, "Vui lòng chọn Phường/Xã", new { @class = "text-danger", @style = "font-size:12px" })*@
+            </div>
+            <div class="col-md-6 mb-2">
+                <input name="txtSoDuong" type="text" class="form-control" placeholder="Số nhà, tên đường" required="required" value="@Session["duongDaNhap"]" />
+                <div class="invalid-feedback">Vui lòng nhập số nhà, tên đường của bạn.</div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+  
+    $(document).ready(function () {
+        $("#OptionsTTP").change(function () {
+            var tpID = $(this).val();
+            //debugger
+            $.ajax({
+                type: "post",
+                url: "/DiaChi/getQuanHuyenList?pMaTP=" + tpID,
+                contentType: "html",
+                success: function (response) {
+                    //debugger
+                    $("#OptionsQH").empty();
+                    $("#OptionsQH").append(response);
+                }
+            })
+        })
+
+        $("#OptionsQH").change(function () {
+            var qhID = $(this).val();
+            //debugger
+            $.ajax({
+                type: "post",
+                url: "/DiaChi/getPhuongXaList?pMaQH=" + qhID,
+                contentType: "html",
+                success: function (response) {
+                    //debugger
+                    $("#OptionsPX").empty();
+                    $("#OptionsPX").append(response);
+                }
+            })
+        })
+    })
+
+        
+</script>
+<script>
+    $(document).ready(function () {
+        $("#MaTinhThanhPho").change(function () {
+            var tpID = $(this).val();
+            //debugger
+            $.ajax({
+                type: "post",
+                url: "/DiaChi/getQuanHuyenList?pMaTP=" + tpID,
+                contentType: "html",
+                success: function (response) {
+                    //debugger
+                    $("#MaQuanHuyen").empty();
+                    $("#MaQuanHuyen").append(response);
+                }
+            })
+        })
+
+        $("#MaQuanHuyen").change(function () {
+            var qhID = $(this).val();
+            //debugger
+            $.ajax({
+                type: "post",
+                url: "/DiaChi/getPhuongXaList?pMaQH=" + qhID,
+                contentType: "html",
+                success: function (response) {
+                    //debugger
+                    $("#MaPhuongXa").empty();
+                    $("#MaPhuongXa").append(response);
+                }
+            })
+        })
+    })
+</script>

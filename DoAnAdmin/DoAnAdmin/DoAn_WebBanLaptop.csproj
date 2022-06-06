@@ -21,6 +21,8 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <Use64BitIISExpress />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -140,9 +142,11 @@
     <Compile Include="Controllers\BannerController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
+    <Compile Include="Controllers\DiaChiController.cs" />
     <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\LogoController.cs" />
     <Compile Include="Controllers\PhieuNhapXuatController.cs" />
+    <Compile Include="Controllers\PhuKienController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\PromotionController.cs" />
     <Compile Include="Controllers\TrademarkController.cs" />
@@ -176,6 +180,7 @@
     <Compile Include="Models\Detail.cs">
       <DependentUpon>QL_Laptop.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DiaChiClass.cs" />
     <Compile Include="Models\Employee.cs">
       <DependentUpon>QL_Laptop.tt</DependentUpon>
     </Compile>
@@ -219,6 +224,27 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>QL_Laptop.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\tblMenu.cs">
+      <DependentUpon>QL_Laptop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblNguoiDungNhomNguoiDung.cs">
+      <DependentUpon>QL_Laptop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblNhomNguoiDung.cs">
+      <DependentUpon>QL_Laptop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblPhanQuyen.cs">
+      <DependentUpon>QL_Laptop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblPhuongXa.cs">
+      <DependentUpon>QL_Laptop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblQuanHuyen.cs">
+      <DependentUpon>QL_Laptop.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\tblTinhThanhPho.cs">
+      <DependentUpon>QL_Laptop.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Trademark.cs">
       <DependentUpon>QL_Laptop.tt</DependentUpon>
     </Compile>
@@ -237,15 +263,23 @@
     <Content Include="Assets\Admin\bootstrap\js\bootstrap.min.js" />
     <Content Include="Assets\Admin\css\buttons.css" />
     <Content Include="Assets\Admin\css\calendar.css" />
+    <Content Include="Assets\Admin\css\flex-slider.css" />
+    <Content Include="Assets\Admin\css\fontawesome.css" />
     <Content Include="Assets\Admin\css\forms.css" />
     <Content Include="Assets\Admin\css\jquery-ui.css" />
     <Content Include="Assets\Admin\css\jquery-ui.min.css" />
+    <Content Include="Assets\Admin\css\lightbox.css" />
+    <Content Include="Assets\Admin\css\owl.css" />
     <Content Include="Assets\Admin\css\sb-admin-2.css" />
     <Content Include="Assets\Admin\css\sb-admin-2.min.css" />
     <Content Include="Assets\Admin\css\stats.css" />
     <Content Include="Assets\Admin\css\Style2.css" />
     <Content Include="Assets\Admin\css\styles.css" />
+    <Content Include="Assets\Admin\css\templatemo-edu-meeting.css" />
     <Content Include="Assets\Admin\images\facebook.png" />
+    <Content Include="Assets\Admin\images\loading.gif" />
+    <Content Include="Assets\Admin\images\next.png" />
+    <Content Include="Assets\Admin\images\prev.png" />
     <Content Include="Assets\Admin\img\undraw_posting_photo.svg" />
     <Content Include="Assets\Admin\img\undraw_profile.svg" />
     <Content Include="Assets\Admin\img\undraw_profile_1.svg" />
@@ -3980,6 +4014,10 @@
     <Content Include="Views\Logo\InsertLogo.cshtml" />
     <Content Include="Views\TuVan\TuVanKhachHang.cshtml" />
     <Content Include="Views\Product\ShowProductsByTuVan.cshtml" />
+    <Content Include="Views\DiaChi\DiaChiPartial.cshtml" />
+    <Content Include="Views\Shared\HienThiQuanHuyen.cshtml" />
+    <Content Include="Views\Shared\HienThiPhuongXa.cshtml" />
+    <Content Include="Views\Product\ShowProductsByTrademark.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -209,5 +209,69 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="tblMenus">
+      <EntityTypeMapping TypeName="QL_LaptopModel.tblMenu">
+        <MappingFragment StoreEntitySet="tblMenu">
+          <ScalarProperty Name="ParentMenu" ColumnName="ParentMenu" />
+          <ScalarProperty Name="TenMenu" ColumnName="TenMenu" />
+          <ScalarProperty Name="MaMenu" ColumnName="MaMenu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblNguoiDungNhomNguoiDungs">
+      <EntityTypeMapping TypeName="QL_LaptopModel.tblNguoiDungNhomNguoiDung">
+        <MappingFragment StoreEntitySet="tblNguoiDungNhomNguoiDung">
+          <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+          <ScalarProperty Name="MaNhomNguoiDung" ColumnName="MaNhomNguoiDung" />
+          <ScalarProperty Name="username" ColumnName="username" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblNhomNguoiDungs">
+      <EntityTypeMapping TypeName="QL_LaptopModel.tblNhomNguoiDung">
+        <MappingFragment StoreEntitySet="tblNhomNguoiDung">
+          <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+          <ScalarProperty Name="TenNhom" ColumnName="TenNhom" />
+          <ScalarProperty Name="MaNhom" ColumnName="MaNhom" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblPhanQuyens">
+      <EntityTypeMapping TypeName="QL_LaptopModel.tblPhanQuyen">
+        <MappingFragment StoreEntitySet="tblPhanQuyen">
+          <ScalarProperty Name="setTime" ColumnName="setTime" />
+          <ScalarProperty Name="CoQuyen" ColumnName="CoQuyen" />
+          <ScalarProperty Name="MaMenu" ColumnName="MaMenu" />
+          <ScalarProperty Name="MaNhomNguoiDung" ColumnName="MaNhomNguoiDung" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblPhuongXas">
+      <EntityTypeMapping TypeName="QL_LaptopModel.tblPhuongXa">
+        <MappingFragment StoreEntitySet="tblPhuongXa">
+          <ScalarProperty Name="TenPhuongXa" ColumnName="TenPhuongXa" />
+          <ScalarProperty Name="MaQuanHuyen" ColumnName="MaQuanHuyen" />
+          <ScalarProperty Name="MaPhuongXa" ColumnName="MaPhuongXa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblQuanHuyens">
+      <EntityTypeMapping TypeName="QL_LaptopModel.tblQuanHuyen">
+        <MappingFragment StoreEntitySet="tblQuanHuyen">
+          <ScalarProperty Name="TenQuanHuyen" ColumnName="TenQuanHuyen" />
+          <ScalarProperty Name="MaTinhThanhPho" ColumnName="MaTinhThanhPho" />
+          <ScalarProperty Name="MaQuanHuyen" ColumnName="MaQuanHuyen" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblTinhThanhPhoes">
+      <EntityTypeMapping TypeName="QL_LaptopModel.tblTinhThanhPho">
+        <MappingFragment StoreEntitySet="tblTinhThanhPho">
+          <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+          <ScalarProperty Name="TenTinhThanhPho" ColumnName="TenTinhThanhPho" />
+          <ScalarProperty Name="MaTinhThanhPho" ColumnName="MaTinhThanhPho" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -27,7 +27,7 @@ namespace DoAnAdmin.Controllers
             if (page == null)
                 page = 1;
             //Tạo kích thước cho trang (PageSize) hay là số lượng sản phẩm trên 1 trang
-            int pageSize = 20;
+            int pageSize = 12;
             //Nếu page = null thì lấy giá trị 1 cho biến pageNumber
             int pageNumber = (page ?? 1);
             //Lấy dữ liệu từ 3 bảng: Products, Detail, Image
@@ -45,6 +45,15 @@ namespace DoAnAdmin.Controllers
                 || t.DoPhanGiai.Contains(strS) || t.TanSoQuet.Contains(strS) || t.CongNgheManHinh.Contains(strS)
                 || t.VGA.Contains(strS) || t.HeDieuHanh.Contains(strS) || t.RaMat.Contains(strS)).OrderBy(p => p.product_id).ToList());
         }
+        //
+        public ActionResult ShowProductsByTrademark(string maTH)
+        {
+            int intMaTH = Convert.ToInt32(maTH);
+            var listProd = db.Details.Where(det => det.Product.trademark_id == intMaTH && det.Product.quanlity > 0).ToList();
+
+            return View(listProd.OrderBy(p => p.product_id));
+        }
+
         //Trang hiển thị sản phẩm Macbook
         public ActionResult ShowProductsMacbook(int? page)
         {

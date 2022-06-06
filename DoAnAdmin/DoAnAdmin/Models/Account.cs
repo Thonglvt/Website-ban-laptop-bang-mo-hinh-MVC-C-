@@ -18,6 +18,7 @@ namespace DoAnAdmin.Models
         {
             this.Customers = new HashSet<Customer>();
             this.Employees = new HashSet<Employee>();
+            this.tblNguoiDungNhomNguoiDungs = new HashSet<tblNguoiDungNhomNguoiDung>();
         }
     
         public string username { get; set; }
@@ -27,5 +28,6 @@ namespace DoAnAdmin.Models
         public virtual AccountType AccountType { get; set; }
         public virtual ICollection<Customer> Customers { get; set; }
         public virtual ICollection<Employee> Employees { get; set; }
+        public virtual ICollection<tblNguoiDungNhomNguoiDung> tblNguoiDungNhomNguoiDungs { get; set; }
     }
 }

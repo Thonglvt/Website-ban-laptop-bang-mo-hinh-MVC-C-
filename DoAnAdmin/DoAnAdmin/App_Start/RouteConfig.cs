@@ -18,6 +18,8 @@ namespace DoAnAdmin
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Product", action = "ShowAllProducts", id = UrlParameter.Optional }
             );
+
+
         }
     }
 }

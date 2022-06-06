@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="QL_LaptopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+<Schema Namespace="QL_LaptopModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="Account">
     <Key>
       <PropertyRef Name="username" />
@@ -171,8 +171,8 @@
       <PropertyRef Name="date_start" />
     </Key>
     <Property Name="product_id" Type="char" MaxLength="9" Nullable="false" />
-    <Property Name="date_start" Type="date" Nullable="false" />
-    <Property Name="date_end" Type="date" />
+    <Property Name="date_start" Type="datetime" Nullable="false" />
+    <Property Name="date_end" Type="datetime" />
     <Property Name="price" Type="decimal" Precision="32" Scale="0" />
     <Property Name="price_after" Type="decimal" Precision="32" Scale="0" />
   </EntityType>
@@ -188,6 +188,65 @@
     <Property Name="priceSum" Type="decimal" Precision="32" Scale="0" />
     <Property Name="date_start" Type="date" />
     <Property Name="date_end" Type="date" />
+  </EntityType>
+  <EntityType Name="tblMenu">
+    <Key>
+      <PropertyRef Name="MaMenu" />
+    </Key>
+    <Property Name="MaMenu" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="TenMenu" Type="nvarchar" MaxLength="1000" />
+    <Property Name="ParentMenu" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="tblNguoiDungNhomNguoiDung">
+    <Key>
+      <PropertyRef Name="username" />
+      <PropertyRef Name="MaNhomNguoiDung" />
+    </Key>
+    <Property Name="username" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="MaNhomNguoiDung" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="GhiChu" Type="nvarchar" MaxLength="1000" />
+  </EntityType>
+  <EntityType Name="tblNhomNguoiDung">
+    <Key>
+      <PropertyRef Name="MaNhom" />
+    </Key>
+    <Property Name="MaNhom" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="TenNhom" Type="nvarchar" MaxLength="200" />
+    <Property Name="GhiChu" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="tblPhanQuyen">
+    <Key>
+      <PropertyRef Name="MaNhomNguoiDung" />
+      <PropertyRef Name="MaMenu" />
+    </Key>
+    <Property Name="MaNhomNguoiDung" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="MaMenu" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="CoQuyen" Type="bit" />
+    <Property Name="setTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="tblPhuongXa">
+    <Key>
+      <PropertyRef Name="MaPhuongXa" />
+    </Key>
+    <Property Name="MaPhuongXa" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="MaQuanHuyen" Type="varchar" MaxLength="100" />
+    <Property Name="TenPhuongXa" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="tblQuanHuyen">
+    <Key>
+      <PropertyRef Name="MaQuanHuyen" />
+    </Key>
+    <Property Name="MaQuanHuyen" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="MaTinhThanhPho" Type="varchar" MaxLength="100" />
+    <Property Name="TenQuanHuyen" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="tblTinhThanhPho">
+    <Key>
+      <PropertyRef Name="MaTinhThanhPho" />
+    </Key>
+    <Property Name="MaTinhThanhPho" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="TenTinhThanhPho" Type="nvarchar" MaxLength="500" />
+    <Property Name="GhiChu" Type="nvarchar" MaxLength="500" />
   </EntityType>
   <EntityType Name="Trademark">
     <Key>
@@ -205,30 +264,6 @@
       </Principal>
       <Dependent Role="Account">
         <PropertyRef Name="account_type" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_CTPN_PN">
-    <End Role="PhieuNhap" Type="Self.PhieuNhap" Multiplicity="1" />
-    <End Role="ChiTietPhieuNhap" Type="Self.ChiTietPhieuNhap" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="PhieuNhap">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="ChiTietPhieuNhap">
-        <PropertyRef Name="PhieuNhap_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_CTPN_Products">
-    <End Role="Products" Type="Self.Products" Multiplicity="1" />
-    <End Role="ChiTietPhieuNhap" Type="Self.ChiTietPhieuNhap" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Products">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="ChiTietPhieuNhap">
-        <PropertyRef Name="product_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -304,42 +339,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Image_Products">
-    <End Role="Products" Type="Self.Products" Multiplicity="1" />
-    <End Role="Image" Type="Self.Image" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Products">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="Image">
-        <PropertyRef Name="product_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_PN_Empl">
-    <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
-    <End Role="PhieuNhap" Type="Self.PhieuNhap" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Employees">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="PhieuNhap">
-        <PropertyRef Name="employee_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Products_trademark">
-    <End Role="Trademark" Type="Self.Trademark" Multiplicity="0..1" />
-    <End Role="Products" Type="Self.Products" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Trademark">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="Products">
-        <PropertyRef Name="trademark_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_promotions_Products">
     <End Role="Products" Type="Self.Products" Multiplicity="1" />
     <End Role="promotions" Type="Self.promotions" Multiplicity="*" />
@@ -376,15 +375,75 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_PX_Empl">
-    <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
-    <End Role="PhieuXuat" Type="Self.PhieuXuat" Multiplicity="*" />
+  <Association Name="FK_tblNguoiDungNhomNguoiDung_Account">
+    <End Role="Account" Type="Self.Account" Multiplicity="1" />
+    <End Role="tblNguoiDungNhomNguoiDung" Type="Self.tblNguoiDungNhomNguoiDung" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Employees">
-        <PropertyRef Name="id" />
+      <Principal Role="Account">
+        <PropertyRef Name="username" />
       </Principal>
-      <Dependent Role="PhieuXuat">
-        <PropertyRef Name="employee_id" />
+      <Dependent Role="tblNguoiDungNhomNguoiDung">
+        <PropertyRef Name="username" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblNguoiDungNhomNguoiDung_tblNhomNguoiDung">
+    <End Role="tblNhomNguoiDung" Type="Self.tblNhomNguoiDung" Multiplicity="1" />
+    <End Role="tblNguoiDungNhomNguoiDung" Type="Self.tblNguoiDungNhomNguoiDung" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblNhomNguoiDung">
+        <PropertyRef Name="MaNhom" />
+      </Principal>
+      <Dependent Role="tblNguoiDungNhomNguoiDung">
+        <PropertyRef Name="MaNhomNguoiDung" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblPhanQuyen_tblMenu">
+    <End Role="tblMenu" Type="Self.tblMenu" Multiplicity="1" />
+    <End Role="tblPhanQuyen" Type="Self.tblPhanQuyen" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblMenu">
+        <PropertyRef Name="MaMenu" />
+      </Principal>
+      <Dependent Role="tblPhanQuyen">
+        <PropertyRef Name="MaMenu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblPhanQuyen_tblNhomNguoiDung">
+    <End Role="tblNhomNguoiDung" Type="Self.tblNhomNguoiDung" Multiplicity="1" />
+    <End Role="tblPhanQuyen" Type="Self.tblPhanQuyen" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblNhomNguoiDung">
+        <PropertyRef Name="MaNhom" />
+      </Principal>
+      <Dependent Role="tblPhanQuyen">
+        <PropertyRef Name="MaNhomNguoiDung" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblPhuongXa_tblQuanHuyen">
+    <End Role="tblQuanHuyen" Type="Self.tblQuanHuyen" Multiplicity="0..1" />
+    <End Role="tblPhuongXa" Type="Self.tblPhuongXa" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblQuanHuyen">
+        <PropertyRef Name="MaQuanHuyen" />
+      </Principal>
+      <Dependent Role="tblPhuongXa">
+        <PropertyRef Name="MaQuanHuyen" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblQuanHuyen_tblTinhThanhPho">
+    <End Role="tblTinhThanhPho" Type="Self.tblTinhThanhPho" Multiplicity="0..1" />
+    <End Role="tblQuanHuyen" Type="Self.tblQuanHuyen" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblTinhThanhPho">
+        <PropertyRef Name="MaTinhThanhPho" />
+      </Principal>
+      <Dependent Role="tblQuanHuyen">
+        <PropertyRef Name="MaTinhThanhPho" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -404,18 +463,17 @@
     <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="promotions" EntityType="Self.promotions" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PromotionsGift" EntityType="Self.PromotionsGift" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblMenu" EntityType="Self.tblMenu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblNguoiDungNhomNguoiDung" EntityType="Self.tblNguoiDungNhomNguoiDung" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblNhomNguoiDung" EntityType="Self.tblNhomNguoiDung" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblPhanQuyen" EntityType="Self.tblPhanQuyen" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblPhuongXa" EntityType="Self.tblPhuongXa" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblQuanHuyen" EntityType="Self.tblQuanHuyen" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblTinhThanhPho" EntityType="Self.tblTinhThanhPho" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Trademark" EntityType="Self.Trademark" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_Acc_AccType" Association="Self.FK_Acc_AccType">
       <End Role="AccountType" EntitySet="AccountType" />
       <End Role="Account" EntitySet="Account" />
-    </AssociationSet>
-    <AssociationSet Name="FK_CTPN_PN" Association="Self.FK_CTPN_PN">
-      <End Role="PhieuNhap" EntitySet="PhieuNhap" />
-      <End Role="ChiTietPhieuNhap" EntitySet="ChiTietPhieuNhap" />
-    </AssociationSet>
-    <AssociationSet Name="FK_CTPN_Products" Association="Self.FK_CTPN_Products">
-      <End Role="Products" EntitySet="Products" />
-      <End Role="ChiTietPhieuNhap" EntitySet="ChiTietPhieuNhap" />
     </AssociationSet>
     <AssociationSet Name="FK_CTPX_Products" Association="Self.FK_CTPX_Products">
       <End Role="Products" EntitySet="Products" />
@@ -441,18 +499,6 @@
       <End Role="Account" EntitySet="Account" />
       <End Role="Employees" EntitySet="Employees" />
     </AssociationSet>
-    <AssociationSet Name="FK_Image_Products" Association="Self.FK_Image_Products">
-      <End Role="Products" EntitySet="Products" />
-      <End Role="Image" EntitySet="Image" />
-    </AssociationSet>
-    <AssociationSet Name="FK_PN_Empl" Association="Self.FK_PN_Empl">
-      <End Role="Employees" EntitySet="Employees" />
-      <End Role="PhieuNhap" EntitySet="PhieuNhap" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Products_trademark" Association="Self.FK_Products_trademark">
-      <End Role="Trademark" EntitySet="Trademark" />
-      <End Role="Products" EntitySet="Products" />
-    </AssociationSet>
     <AssociationSet Name="FK_promotions_Products" Association="Self.FK_promotions_Products">
       <End Role="Products" EntitySet="Products" />
       <End Role="promotions" EntitySet="promotions" />
@@ -465,9 +511,29 @@
       <End Role="Customer" EntitySet="Customer" />
       <End Role="PhieuXuat" EntitySet="PhieuXuat" />
     </AssociationSet>
-    <AssociationSet Name="FK_PX_Empl" Association="Self.FK_PX_Empl">
-      <End Role="Employees" EntitySet="Employees" />
-      <End Role="PhieuXuat" EntitySet="PhieuXuat" />
+    <AssociationSet Name="FK_tblNguoiDungNhomNguoiDung_Account" Association="Self.FK_tblNguoiDungNhomNguoiDung_Account">
+      <End Role="Account" EntitySet="Account" />
+      <End Role="tblNguoiDungNhomNguoiDung" EntitySet="tblNguoiDungNhomNguoiDung" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblNguoiDungNhomNguoiDung_tblNhomNguoiDung" Association="Self.FK_tblNguoiDungNhomNguoiDung_tblNhomNguoiDung">
+      <End Role="tblNhomNguoiDung" EntitySet="tblNhomNguoiDung" />
+      <End Role="tblNguoiDungNhomNguoiDung" EntitySet="tblNguoiDungNhomNguoiDung" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblPhanQuyen_tblMenu" Association="Self.FK_tblPhanQuyen_tblMenu">
+      <End Role="tblMenu" EntitySet="tblMenu" />
+      <End Role="tblPhanQuyen" EntitySet="tblPhanQuyen" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblPhanQuyen_tblNhomNguoiDung" Association="Self.FK_tblPhanQuyen_tblNhomNguoiDung">
+      <End Role="tblNhomNguoiDung" EntitySet="tblNhomNguoiDung" />
+      <End Role="tblPhanQuyen" EntitySet="tblPhanQuyen" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblPhuongXa_tblQuanHuyen" Association="Self.FK_tblPhuongXa_tblQuanHuyen">
+      <End Role="tblQuanHuyen" EntitySet="tblQuanHuyen" />
+      <End Role="tblPhuongXa" EntitySet="tblPhuongXa" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblQuanHuyen_tblTinhThanhPho" Association="Self.FK_tblQuanHuyen_tblTinhThanhPho">
+      <End Role="tblTinhThanhPho" EntitySet="tblTinhThanhPho" />
+      <End Role="tblQuanHuyen" EntitySet="tblQuanHuyen" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

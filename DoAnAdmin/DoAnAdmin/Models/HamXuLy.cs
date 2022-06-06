@@ -293,5 +293,7 @@ namespace DoAnAdmin.Models
         {
             return strNumber.All(char.IsDigit); 
         }
+
+
     }
 }

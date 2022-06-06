@@ -1,0 +1,11 @@
+﻿@model DoAnAdmin.Models.tblPhuongXa
+
+<option value="">Chọn Phường/Xã</option>
+@if (ViewBag.PhuongXaList != null)
+{
+    foreach (var item in ViewBag.PhuongXaList)
+    {
+        <option value="@item.Value">@item.Text</option>
+    }
+
+}

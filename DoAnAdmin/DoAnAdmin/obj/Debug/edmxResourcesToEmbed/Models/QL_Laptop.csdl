@@ -10,6 +10,7 @@
     <NavigationProperty Name="AccountType" Relationship="Self.FK_Acc_AccType" FromRole="Account" ToRole="AccountType" />
     <NavigationProperty Name="Customers" Relationship="Self.FK_Customer_Acc" FromRole="Account" ToRole="Customer" />
     <NavigationProperty Name="Employees" Relationship="Self.FK_Employees_Acc" FromRole="Account" ToRole="Employees" />
+    <NavigationProperty Name="tblNguoiDungNhomNguoiDungs" Relationship="QL_LaptopModel.FK_tblNguoiDungNhomNguoiDung_Account" FromRole="Account" ToRole="tblNguoiDungNhomNguoiDung" />
   </EntityType>
   <EntityType Name="AccountType">
     <Key>
@@ -188,8 +189,8 @@
       <PropertyRef Name="date_start" />
     </Key>
     <Property Name="product_id" Type="String" MaxLength="9" FixedLength="true" Unicode="false" Nullable="false" />
-    <Property Name="date_start" Type="DateTime" Nullable="false" Precision="0" />
-    <Property Name="date_end" Type="DateTime" Precision="0" />
+    <Property Name="date_start" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="date_end" Type="DateTime" Precision="3" />
     <Property Name="price" Type="Decimal" Precision="32" Scale="0" />
     <Property Name="price_after" Type="Decimal" Precision="32" Scale="0" />
     <NavigationProperty Name="Product" Relationship="Self.FK_promotions_Products" FromRole="promotions" ToRole="Products" />
@@ -465,6 +466,37 @@
       <End Role="PhieuXuat" EntitySet="PhieuXuats" />
       <End Role="ChiTietPhieuXuat" EntitySet="ChiTietPhieuXuats" />
     </AssociationSet>
+    <EntitySet Name="tblMenus" EntityType="QL_LaptopModel.tblMenu" />
+    <EntitySet Name="tblNguoiDungNhomNguoiDungs" EntityType="QL_LaptopModel.tblNguoiDungNhomNguoiDung" />
+    <EntitySet Name="tblNhomNguoiDungs" EntityType="QL_LaptopModel.tblNhomNguoiDung" />
+    <EntitySet Name="tblPhanQuyens" EntityType="QL_LaptopModel.tblPhanQuyen" />
+    <EntitySet Name="tblPhuongXas" EntityType="QL_LaptopModel.tblPhuongXa" />
+    <EntitySet Name="tblQuanHuyens" EntityType="QL_LaptopModel.tblQuanHuyen" />
+    <EntitySet Name="tblTinhThanhPhoes" EntityType="QL_LaptopModel.tblTinhThanhPho" />
+    <AssociationSet Name="FK_tblNguoiDungNhomNguoiDung_Account" Association="QL_LaptopModel.FK_tblNguoiDungNhomNguoiDung_Account">
+      <End Role="Account" EntitySet="Accounts" />
+      <End Role="tblNguoiDungNhomNguoiDung" EntitySet="tblNguoiDungNhomNguoiDungs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblPhanQuyen_tblMenu" Association="QL_LaptopModel.FK_tblPhanQuyen_tblMenu">
+      <End Role="tblMenu" EntitySet="tblMenus" />
+      <End Role="tblPhanQuyen" EntitySet="tblPhanQuyens" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblNguoiDungNhomNguoiDung_tblNhomNguoiDung" Association="QL_LaptopModel.FK_tblNguoiDungNhomNguoiDung_tblNhomNguoiDung">
+      <End Role="tblNhomNguoiDung" EntitySet="tblNhomNguoiDungs" />
+      <End Role="tblNguoiDungNhomNguoiDung" EntitySet="tblNguoiDungNhomNguoiDungs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblPhanQuyen_tblNhomNguoiDung" Association="QL_LaptopModel.FK_tblPhanQuyen_tblNhomNguoiDung">
+      <End Role="tblNhomNguoiDung" EntitySet="tblNhomNguoiDungs" />
+      <End Role="tblPhanQuyen" EntitySet="tblPhanQuyens" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblPhuongXa_tblQuanHuyen" Association="QL_LaptopModel.FK_tblPhuongXa_tblQuanHuyen">
+      <End Role="tblQuanHuyen" EntitySet="tblQuanHuyens" />
+      <End Role="tblPhuongXa" EntitySet="tblPhuongXas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblQuanHuyen_tblTinhThanhPho" Association="QL_LaptopModel.FK_tblQuanHuyen_tblTinhThanhPho">
+      <End Role="tblTinhThanhPho" EntitySet="tblTinhThanhPhoes" />
+      <End Role="tblQuanHuyen" EntitySet="tblQuanHuyens" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="ChiTietPhieuXuat">
     <Key>
@@ -499,6 +531,148 @@
       </Principal>
       <Dependent Role="ChiTietPhieuXuat">
         <PropertyRef Name="phieuXuat_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="tblMenu">
+    <Key>
+      <PropertyRef Name="MaMenu" />
+    </Key>
+    <Property Name="MaMenu" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="TenMenu" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="ParentMenu" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblPhanQuyens" Relationship="QL_LaptopModel.FK_tblPhanQuyen_tblMenu" FromRole="tblMenu" ToRole="tblPhanQuyen" />
+  </EntityType>
+  <EntityType Name="tblNguoiDungNhomNguoiDung">
+    <Key>
+      <PropertyRef Name="username" />
+      <PropertyRef Name="MaNhomNguoiDung" />
+    </Key>
+    <Property Name="username" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="MaNhomNguoiDung" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="GhiChu" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Account" Relationship="QL_LaptopModel.FK_tblNguoiDungNhomNguoiDung_Account" FromRole="tblNguoiDungNhomNguoiDung" ToRole="Account" />
+    <NavigationProperty Name="tblNhomNguoiDung" Relationship="QL_LaptopModel.FK_tblNguoiDungNhomNguoiDung_tblNhomNguoiDung" FromRole="tblNguoiDungNhomNguoiDung" ToRole="tblNhomNguoiDung" />
+  </EntityType>
+  <EntityType Name="tblNhomNguoiDung">
+    <Key>
+      <PropertyRef Name="MaNhom" />
+    </Key>
+    <Property Name="MaNhom" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="TenNhom" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblNguoiDungNhomNguoiDungs" Relationship="QL_LaptopModel.FK_tblNguoiDungNhomNguoiDung_tblNhomNguoiDung" FromRole="tblNhomNguoiDung" ToRole="tblNguoiDungNhomNguoiDung" />
+    <NavigationProperty Name="tblPhanQuyens" Relationship="QL_LaptopModel.FK_tblPhanQuyen_tblNhomNguoiDung" FromRole="tblNhomNguoiDung" ToRole="tblPhanQuyen" />
+  </EntityType>
+  <EntityType Name="tblPhanQuyen">
+    <Key>
+      <PropertyRef Name="MaNhomNguoiDung" />
+      <PropertyRef Name="MaMenu" />
+    </Key>
+    <Property Name="MaNhomNguoiDung" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="MaMenu" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CoQuyen" Type="Boolean" />
+    <Property Name="setTime" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="tblMenu" Relationship="QL_LaptopModel.FK_tblPhanQuyen_tblMenu" FromRole="tblPhanQuyen" ToRole="tblMenu" />
+    <NavigationProperty Name="tblNhomNguoiDung" Relationship="QL_LaptopModel.FK_tblPhanQuyen_tblNhomNguoiDung" FromRole="tblPhanQuyen" ToRole="tblNhomNguoiDung" />
+  </EntityType>
+  <EntityType Name="tblPhuongXa">
+    <Key>
+      <PropertyRef Name="MaPhuongXa" />
+    </Key>
+    <Property Name="MaPhuongXa" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="MaQuanHuyen" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="TenPhuongXa" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblQuanHuyen" Relationship="QL_LaptopModel.FK_tblPhuongXa_tblQuanHuyen" FromRole="tblPhuongXa" ToRole="tblQuanHuyen" />
+  </EntityType>
+  <EntityType Name="tblQuanHuyen">
+    <Key>
+      <PropertyRef Name="MaQuanHuyen" />
+    </Key>
+    <Property Name="MaQuanHuyen" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="MaTinhThanhPho" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="TenQuanHuyen" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblPhuongXas" Relationship="QL_LaptopModel.FK_tblPhuongXa_tblQuanHuyen" FromRole="tblQuanHuyen" ToRole="tblPhuongXa" />
+    <NavigationProperty Name="tblTinhThanhPho" Relationship="QL_LaptopModel.FK_tblQuanHuyen_tblTinhThanhPho" FromRole="tblQuanHuyen" ToRole="tblTinhThanhPho" />
+  </EntityType>
+  <EntityType Name="tblTinhThanhPho">
+    <Key>
+      <PropertyRef Name="MaTinhThanhPho" />
+    </Key>
+    <Property Name="MaTinhThanhPho" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="TenTinhThanhPho" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="GhiChu" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblQuanHuyens" Relationship="QL_LaptopModel.FK_tblQuanHuyen_tblTinhThanhPho" FromRole="tblTinhThanhPho" ToRole="tblQuanHuyen" />
+  </EntityType>
+  <Association Name="FK_tblNguoiDungNhomNguoiDung_Account">
+    <End Type="QL_LaptopModel.Account" Role="Account" Multiplicity="1" />
+    <End Type="QL_LaptopModel.tblNguoiDungNhomNguoiDung" Role="tblNguoiDungNhomNguoiDung" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Account">
+        <PropertyRef Name="username" />
+      </Principal>
+      <Dependent Role="tblNguoiDungNhomNguoiDung">
+        <PropertyRef Name="username" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblPhanQuyen_tblMenu">
+    <End Type="QL_LaptopModel.tblMenu" Role="tblMenu" Multiplicity="1" />
+    <End Type="QL_LaptopModel.tblPhanQuyen" Role="tblPhanQuyen" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblMenu">
+        <PropertyRef Name="MaMenu" />
+      </Principal>
+      <Dependent Role="tblPhanQuyen">
+        <PropertyRef Name="MaMenu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblNguoiDungNhomNguoiDung_tblNhomNguoiDung">
+    <End Type="QL_LaptopModel.tblNhomNguoiDung" Role="tblNhomNguoiDung" Multiplicity="1" />
+    <End Type="QL_LaptopModel.tblNguoiDungNhomNguoiDung" Role="tblNguoiDungNhomNguoiDung" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblNhomNguoiDung">
+        <PropertyRef Name="MaNhom" />
+      </Principal>
+      <Dependent Role="tblNguoiDungNhomNguoiDung">
+        <PropertyRef Name="MaNhomNguoiDung" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblPhanQuyen_tblNhomNguoiDung">
+    <End Type="QL_LaptopModel.tblNhomNguoiDung" Role="tblNhomNguoiDung" Multiplicity="1" />
+    <End Type="QL_LaptopModel.tblPhanQuyen" Role="tblPhanQuyen" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblNhomNguoiDung">
+        <PropertyRef Name="MaNhom" />
+      </Principal>
+      <Dependent Role="tblPhanQuyen">
+        <PropertyRef Name="MaNhomNguoiDung" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblPhuongXa_tblQuanHuyen">
+    <End Type="QL_LaptopModel.tblQuanHuyen" Role="tblQuanHuyen" Multiplicity="0..1" />
+    <End Type="QL_LaptopModel.tblPhuongXa" Role="tblPhuongXa" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblQuanHuyen">
+        <PropertyRef Name="MaQuanHuyen" />
+      </Principal>
+      <Dependent Role="tblPhuongXa">
+        <PropertyRef Name="MaQuanHuyen" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblQuanHuyen_tblTinhThanhPho">
+    <End Type="QL_LaptopModel.tblTinhThanhPho" Role="tblTinhThanhPho" Multiplicity="0..1" />
+    <End Type="QL_LaptopModel.tblQuanHuyen" Role="tblQuanHuyen" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblTinhThanhPho">
+        <PropertyRef Name="MaTinhThanhPho" />
+      </Principal>
+      <Dependent Role="tblQuanHuyen">
+        <PropertyRef Name="MaTinhThanhPho" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

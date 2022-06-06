@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="97e22183873e4596aff0ec183f81b21c" Name="Diagram1">
+      <Diagram DiagramId="97e22183873e4596aff0ec183f81b21c" Name="Diagram1" ZoomLevel="67">
         <EntityTypeShape EntityType="QL_LaptopModel.Account" Width="1.5" PointX="1.5" PointY="3.5" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_LaptopModel.AccountType" Width="1.5" PointX="1.5" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="QL_LaptopModel.Banner" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
@@ -37,6 +37,19 @@
         <EntityTypeShape EntityType="QL_LaptopModel.ChiTietPhieuXuat" Width="1.5" PointX="8.25" PointY="10.625" />
         <AssociationConnector Association="QL_LaptopModel.FK_CTPX_Products" />
         <AssociationConnector Association="QL_LaptopModel.FK_CTPX_PX" />
+        <EntityTypeShape EntityType="QL_LaptopModel.tblMenu" Width="1.5" PointX="8.375" PointY="18.625" />
+        <EntityTypeShape EntityType="QL_LaptopModel.tblNguoiDungNhomNguoiDung" Width="1.5" PointX="10.625" PointY="4.5" />
+        <EntityTypeShape EntityType="QL_LaptopModel.tblNhomNguoiDung" Width="1.5" PointX="8.375" PointY="5.5" />
+        <EntityTypeShape EntityType="QL_LaptopModel.tblPhanQuyen" Width="1.5" PointX="10.625" PointY="7.375" />
+        <EntityTypeShape EntityType="QL_LaptopModel.tblPhuongXa" Width="1.5" PointX="12.875" PointY="1" />
+        <EntityTypeShape EntityType="QL_LaptopModel.tblQuanHuyen" Width="1.5" PointX="10.625" PointY="0.875" />
+        <EntityTypeShape EntityType="QL_LaptopModel.tblTinhThanhPho" Width="1.5" PointX="8.375" PointY="1" />
+        <AssociationConnector Association="QL_LaptopModel.FK_tblNguoiDungNhomNguoiDung_Account" />
+        <AssociationConnector Association="QL_LaptopModel.FK_tblPhanQuyen_tblMenu" />
+        <AssociationConnector Association="QL_LaptopModel.FK_tblNguoiDungNhomNguoiDung_tblNhomNguoiDung" />
+        <AssociationConnector Association="QL_LaptopModel.FK_tblPhanQuyen_tblNhomNguoiDung" />
+        <AssociationConnector Association="QL_LaptopModel.FK_tblPhuongXa_tblQuanHuyen" />
+        <AssociationConnector Association="QL_LaptopModel.FK_tblQuanHuyen_tblTinhThanhPho" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

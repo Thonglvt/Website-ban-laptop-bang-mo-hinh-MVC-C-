@@ -156,7 +156,6 @@ namespace DoAnAdmin.Controllers
             //ViewBag.IsKhuyenMai = (promPrice == null) ? promPrice.price_after : null;
 
             Session["maSPTT"] = maSP;
-            promotion pro = db.promotions.SingleOrDefault(p => p.product_id == maSP);
             ViewBag.maSP = maSP;
             return View(product);
         }
@@ -168,7 +167,6 @@ namespace DoAnAdmin.Controllers
                 maSP = Session["maSPTT"].ToString();
             var promPrice = db.promotions.SingleOrDefault(t => t.product_id == maSP && (DateTime.Now >= t.date_start && DateTime.Now <= t.date_end));
                 
-            promotion pro = db.promotions.SingleOrDefault(p => p.product_id == maSP);
             Product product = db.Products.FirstOrDefault(p => p.id == maSP);
             
             ViewBag.maSP = maSP;
@@ -190,19 +188,33 @@ namespace DoAnAdmin.Controllers
                 ViewBag.tbHoTen = "Vui lòng cho biết họ tên của bạn";
                 return View(product);
             }
-            else if(string.IsNullOrEmpty(f["txtSdt"]))
+            if(string.IsNullOrEmpty(f["txtSdt"]))
             {
                 ViewBag.tbSDT = "Vui lòng nhập số điện thoại";
                 return View(product);
             }
-            else if (string.IsNullOrEmpty(f["txtAddress"]))
-            {
-                ViewBag.tbDiaChi = "Vui lòng nhập địa chỉ giao hàng";
-                return View(product);
-            }
+
+            //Xử lý địa chỉ
+            var duong = f["txtSoDuong"];
+            var tinhTP = f["OptionsTTP"];
+            var QH = f["OptionsQH"];
+            var PX = f["OptionsPX"];
+            string address = "";
             string phone = f["txtSdt"].ToString();
             string name = f["txtHoTen"].ToString();
-            string address = f["txtAddress"].ToString();
+            
+            if (tinhTP != null && QH != null && PX != null)
+            {
+                //Tìm tên thông qua mã tp, mã quận, mã phường
+                var tp = db.tblTinhThanhPhoes.FirstOrDefault(t => t.MaTinhThanhPho == tinhTP.ToString());
+                string tenTP = (tp != null) ? tp.TenTinhThanhPho : "Thành phố Hồ Chí Minh";
+                var quan = db.tblQuanHuyens.FirstOrDefault(t => t.MaQuanHuyen == QH.ToString());
+                string tenQ = (quan != null) ? quan.TenQuanHuyen : "Quận Tân Phú";
+                var phuong = db.tblPhuongXas.FirstOrDefault(t => t.MaPhuongXa == PX.ToString());
+                string tenP = (phuong != null) ? phuong.TenPhuongXa : "Phường Tây Thạnh";
+
+                address = duong.ToString() + ", " + tenP + ", " + tenQ + ", " + tenTP;
+            }
             //Kiểm tra khi khách hàng chưa đăng nhập
 
             string maPX = xuLy.createIDPhieuXuat();
@@ -224,6 +236,7 @@ namespace DoAnAdmin.Controllers
                 cus.id = IDKH;
                 cus.name = name;
                 cus.phone = phone;
+                cus.birthday = new DateTime( 1975,1,1);
                 cus.Address = address;
                 cus.gender = gender;
                 cus.email = "No";

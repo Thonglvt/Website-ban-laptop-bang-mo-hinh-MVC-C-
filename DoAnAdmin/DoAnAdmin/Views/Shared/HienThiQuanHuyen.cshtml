@@ -1,0 +1,12 @@
+﻿@model DoAnAdmin.Models.tblQuanHuyen
+
+
+<option value="">Chọn Quận/Huyện</option>
+@if (ViewBag.QuanHuyenList != null)
+{
+    foreach (var item in ViewBag.QuanHuyenList)
+    {
+        <option value="@item.Value">@item.Text</option>
+    }
+
+}
