@@ -5,8 +5,8 @@
     Layout = "~/Views/Shared/_DetailLayoutPage.cshtml";
 }
 
-<div class="container card border-dark">
-    <table class="table">
+<div class="container card border-dark table-responsive-md">
+    <table class="table table-sm">
         <thead>
             <tr style="background-color:lavender">
                 <th scope="col">Mã Sản Phẩm</th>
@@ -15,11 +15,10 @@
                 <th scope="col">Số lượng</th>
                 <th scope="col">Đơn giá</th>
                 <th scope="col">Thành tiền</th>
-                @*<th>@Html.ActionLink("Xóa All", "XoaGioHang_All", "GioHang")</th>*@
                 <th scope="col"></th>
                 <th scope="col"></th>
             </tr>
-        </thead>    
+        </thead>
         <tbody>
             @foreach (var item in Model)
             {
@@ -30,7 +29,7 @@
                     @using (Html.BeginForm("CapNhatGioHang", "Cart", new { @MaSP = item.sIdSP }))
                     {
                         <td width="12%">
-                            <input type="number" min="1" class="form-control" name="txtSoLuong" value="@item.iSoLuong" size="1" />
+                            <input type="number" min="1" class="form-control" name="txtSoLuong" value="@item.iSoLuong" />
                             @if (Session["tbTxtSoLuong"] != null)
                             {
                                 <span class="text-danger" style="font-size:small">@Session["tbTxtSoLuong"]</span>
@@ -61,8 +60,10 @@
             </tr>
         </tbody>
     </table>
+</div>
 
-    <div class="card mb-2">
+<div class="container card">
+    <div class="card mb-2 mt-2">
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
             <li class="nav-item">
                 <a class="nav-link collapsed " href="#" data-toggle="collapse" data-target="#collapseUtilities"
@@ -73,110 +74,146 @@
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                      data-parent="#accordionSidebar">
                     <div class="card-body">
+                        @*//Thông tin khách hàng*@
                         <div>
                             <p style="text-transform:uppercase;font-size:15px">THÔNG TIN KHÁCH HÀNG:</p>
                         </div>
-                        @using (Html.BeginForm())
-                        {
-                            @Html.AntiForgeryToken()
-                            @Html.ValidationSummary(true)
-                            <table class="table">
-                                <tr>
-                                    <td>
-                                        <input type="radio" name="optRadioGender" id="optionsRadiosNam" value="Nam" checked>&nbsp;Anh &nbsp;&nbsp;
-                                        <input type="radio" name="optRadioGender" id="optionsRadiosNu" value="Nữ">&nbsp;Chị
-                                    </td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="text" class="form-control" name="txtHoTen" placeholder="Họ và Tên" />
-                                        <span class="text-danger" style="font-size:13px">@ViewBag.tbHoTen</span>
-                                    </td>
-                                    <td>
-                                        <input type="number" class="form-control" name="txtSdt" placeholder="Số điện thoại" />
-                                        <span class="text-danger" style="font-size:13px">@ViewBag.tbSDT</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><span style="text-transform:uppercase;font-size:15px">Chọn cách thức nhận hàng:</span></td>
-                                    <td>
-                                        <input type="radio" name="optRadios" id="optionsRadios3" value="1" checked>&nbsp;Giao tận nơi &nbsp;&nbsp;
-                                        <input type="radio" name="optRadios" id="optionsRadios4" value="2">&nbsp;Nhận tại cửa hàng
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <textarea class="form-control" name="txtAddress" placeholder="Số nhà, tên đường, Phường/Xã, Quận/Huyện, Tỉnh/Thành Phố"></textarea>
-                                        <span class="text-danger" style="font-size:13px">@ViewBag.tbDiaChi</span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <input type="text" class="form-control" name="txtYeuCau" placeholder="Yêu cầu khác (Không bắt buộc)" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <input type="checkbox" value="Television" name="Chk1">&nbsp;Gọi người khác nhận hàng (nếu có)<br />
-                                        <input type="checkbox" value="Website" name="Chk2">&nbsp;Hướng dẫn sử dụng, giải đáp thắc mắc sản phẩm<br />
-                                        <input type="checkbox" value="NewsPaper" name="Chk3">&nbsp;Xuất hóa đơn công ty<br />
-                                    </td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <div class="card">
-                                            <div class="card-header">
-                                                <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebarGG">
-                                                    <li class="nav-item">
-                                                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilitiesGG"
-                                                           aria-expanded="true" aria-controls="collapseUtilitiesGG">
-                                                            &nbsp;&nbsp;<i class="fas fa-gift"></i>
-                                                            <span>Dùng mã giảm giá</span>
-                                                        </a>
-                                                        <div id="collapseUtilitiesGG" class="collapse" aria-labelledby="headingUtilitiesGG"
-                                                             data-parent="#accordionSidebarGG">
-                                                            <div class="bg-white py-2 collapse-inner rounded row">
-                                                                <div class="col-9">
-                                                                    @*<h6 class="collapse-header">Custom Utilities:</h6>*@
-                                                                    <input type="text" class="form-control" name="txtMaGiamGia" placeholder="Nhập mã giảm giá" />
-                                                                </div>
-                                                                <div class="col-3">
-                                                                    <a class="btn btn-primary" href="#">Áp dụng</a>
-                                                                </div>
+                        @*@using (Html.BeginForm())
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationSummary(true)*@
+
+                        <form action="/User/ThanhToanNgay" method="post" class="needs-validation" novalidate>
+                            @*Giới tính*@
+                            <div class="row mt-2">
+                                <div class="col-md-3">
+                                    <div class="row">
+                                        <div class="col-md-6"><input type="radio" name="optRadioGender" id="optionsRadiosNam" value="Nam" checked>&nbsp;Anh &nbsp;&nbsp;</div>
+                                        <div class="col-md-6"><input type="radio" name="optRadioGender" id="optionsRadiosNu" value="Nữ">&nbsp;Chị</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-9"> </div>
+                            </div>
+                            @*//Họ tên và SDT*@
+                            <div class="row mt-2">
+                                <div class="col-md-6 mb-2">
+                                    <input type="text" class="form-control" name="txtHoTen" value="@ViewBag.hoTenDaNhap" placeholder="Họ và Tên" required />
+                                    <div class="invalid-feedback">Vui lòng nhập họ và tên.</div>
+                                    @*<span class="text-danger" style="font-size:13px">@ViewBag.tbHoTen</span>*@
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <input type="number" class="form-control" name="txtSdt" placeholder="Số điện thoại" value="@ViewBag.sDTDaNhap" required="required" />
+                                    <div class="invalid-feedback">Vui lòng nhập số điện thoại.</div>
+                                </div>
+                            </div>
+                            @*//Cách thức giao hàng*@
+                            <div class="row mt-1">
+                                <div class="col-md-6" style="text-transform:uppercase;font-size:15px">Chọn cách thức nhận hàng:</div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col-md-6"><input type="radio" name="optRadios" id="optionsRadios3" value="1" checked>&nbsp;Giao tận nơi</div>
+                                        <div class="col-md-6"><input type="radio" name="optRadios" id="optionsRadios4" value="2">&nbsp;Nhận tại cửa hàng</div>
+                                    </div>
+                                </div>
+                            </div>
+                            @*//Địa chỉ giao hàng*@
+                            @Html.Action("DiaChiPartial", "DiaChi")
+                            @*//Yêu cấu khác*@
+                            <div class="row mt-2">
+                                <div class="col-md-12"><input type="text" class="form-control" name="txtYeuCau" placeholder="Yêu cầu khác (Không bắt buộc)" /></div>
+                            </div>
+                            @*//Checkbox*@
+                            <div class="row mt-2">
+                                <div class="col-md-12">
+                                    <input type="checkbox" value="Television" name="Chk1">&nbsp;Gọi người khác nhận hàng (nếu có)
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input type="checkbox" value="Website" name="Chk2">&nbsp;Hướng dẫn sử dụng, giải đáp thắc mắc sản phẩm
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input type="checkbox" value="NewsPaper" name="Chk3">&nbsp;Xuất hóa đơn công ty
+                                </div>
+                            </div>
+                            @*//Dùng mã giảm giá*@
+                            <div class="row mt-3">
+                                <div class="col-md-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebarGG">
+                                                <li class="nav-item">
+                                                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilitiesGG"
+                                                       aria-expanded="true" aria-controls="collapseUtilitiesGG">
+                                                        &nbsp;&nbsp;<i class="fas fa-gift"></i>
+                                                        <span>Dùng mã giảm giá</span>
+                                                    </a>
+                                                    <div id="collapseUtilitiesGG" class="collapse" aria-labelledby="headingUtilities"
+                                                         data-parent="#accordionSidebarGG">
+                                                        <div class="bg-white py-2 collapse-inner rounded row">
+                                                            <div class="col-md-9">
+                                                                @*<h6 class="collapse-header">Custom Utilities:</h6>*@
+                                                                <input type="text" class="form-control" name="txtMaGiamGia" placeholder="Nhập mã giảm giá" />
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <a id="btnApDungMGG" class="btn btn-secondary">Áp dụng</a>
                                                             </div>
                                                         </div>
-                                                    </li>
-                                                </ul>
-                                            </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
                                         </div>
-                                    </td>
-                                </tr>
-                                @*<tr>
-                                    <td><span style="font-weight:bold">Tổng tiền:</span></td>
-                                    <td class="text-danger " style="font-weight: bold;text-align:right">@string.Format("{0:0,0}", ViewBag.IsKhuyenMai)<sup>đ</sup></td>
-                                </tr>*@
-                                <tr>
-                                    <td colspan="2" style="text-align:center">
-                                        <input class="btn btn-warning text-light" type="submit" value="ĐẶT HÀNG" style="font-weight:bold; width:720px" />
-                                        <center class="text-muted mt-1" style="font-size:13px">Anh/Chị có thể chọn hình thức thanh toán sau khi đặt hàng</center>
-                                    </td>
-                                </tr>
-                            </table>
-                        }
-                    </div>  
+                                    </div>
+                                </div>
+                            </div>
+
+                            @*//Button Đặt hàng*@
+                            <div class="row mt-3">
+                                <div class="col-12">
+                                    <input class="btn btn-warning text-light" type="submit" value="ĐẶT HÀNG" style="font-weight:bold; width:100%" />
+                                    <center class="text-muted mt-1" style="font-size:13px">Anh/Chị có thể chọn hình thức thanh toán sau khi đặt hàng</center>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                     @*<div class="bg-white py-2 collapse-inner rounded row">
-                        <div class="col-9">
-                            <input type="text" class="form-control" name="txtMaGiamGia" placeholder="Nhập mã giảm giá" />
-                        </div>
-                        <div class="col-3">
-                            <a class="btn btn-primary" href="#">Áp dụng</a>
-                        </div>
-                    </div>*@
+                            <div class="col-9">
+                                <input type="text" class="form-control" name="txtMaGiamGia" placeholder="Nhập mã giảm giá" />
+                            </div>
+                            <div class="col-3">
+                                <a class="btn btn-primary" href="#">Áp dụng</a>
+                            </div>
+                        </div>*@
                 </div>
             </li>
         </ul>
     </div>
 </div>
+
+<script>
+    document.getElementById("btnApDungMGG").disabled = true;
+
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+</script>
 
